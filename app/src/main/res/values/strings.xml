@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">PIEAS Student Directory</string>
+    <string name="registration_form">Registration Form</string>
+    <string name="name">Name :</string>
+    <string name="department">Department :</string>
+    <string name="registration">Registration# :</string>
+    <string name="phone">Phone# :</string>
+    <string name="gender">Gender :</string>
+    <string name="name2">Name</string>
+    <string name="reg_no">##-#-#-###-####</string>
+    <string name="dee_dme_dcis">DEE, DME, DCIS</string>
+    <string name="phone_no">####-#######</string>
+    <string name="male_female">Male, Female</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="search_student">Search Student</string>
+    <string name="search">Search</string>
+    <string name="about">About</string>
+    <string name="remove">Remove</string>
+    <string name="student_list">Student List</string>
+</resources>
