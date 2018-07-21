@@ -64,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.search:
                 Log.i("onOptionsItemSelected", "case search");
                 intent = new Intent(getApplicationContext(), SearchActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, SearchActivity.SEARCH_ACTIVITY);
                 break;
             case R.id.add:
                 Log.i("onOptionsItemSelected", "case add");
                 intent = new Intent(getApplicationContext(), RegistrationActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, RegistrationActivity.REGISTRATION_ACTIVITY);
                 break;
             case R.id.remove:
                 Log.i("onOptionsItemSelected", "case remove");
@@ -99,7 +99,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("onActivityResult", "data -> " + data);
+        Log.i("onActivityResult", "requestCode -> " + requestCode);
+        Log.i("onActivityResult", "resultCode -> " + resultCode);
+        Toast.makeText(this, "requestCode -> " + requestCode + "; resultCode -> " + resultCode, Toast.LENGTH_SHORT).show();
     }
 
     public void addStudent(Student student){

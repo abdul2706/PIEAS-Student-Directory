@@ -1,7 +1,6 @@
 package com.example.abdul.pieasstudentdirectory;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -15,6 +14,8 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class SearchActivity extends AppCompatActivity {
+
+    public static final int SEARCH_ACTIVITY = 3;
 
     private String[] labelStrings = {"Name : ", "Registration# : ", "Department : ", "Phone# : ", "Gender : "};
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
@@ -42,66 +43,6 @@ public class SearchActivity extends AppCompatActivity {
         cancelButton = findViewById(R.id.cancelButton);
     }
 
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-//        super.onCreate(savedInstanceState, persistentState);
-//        setContentView(R.layout.activity_search);
-//    }
-
-//    public StudentSearch(Window window) {
-//        this.setTitle(TITLE);
-//        this.setSize(new Dimension(FRAME_WIDTH / 2, FRAME_HEIGHT / 2));
-//        this.setLocationRelativeTo(null);
-//
-//        this.window = window;
-//        this.setLayout(LAYOUT_GRIDBAG);
-//        this.init();
-//
-//        // this.setVisible(true);
-//        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-//    }
-//
-//    public void init() {
-//        CONSTRAINTS_GRIDBAG.fill = GridBagConstraints.VERTICAL;
-//        CONSTRAINTS_GRIDBAG.gridwidth = 1;
-//        CONSTRAINTS_GRIDBAG.gridheight = 1;
-//        CONSTRAINTS_GRIDBAG.insets = new Insets(10, 10, 10, 10);
-//
-//        for (int i = 0; i < labelStrings.length; i++) {
-//            labels[i] = new JLabel(labelStrings[i]);
-//            CONSTRAINTS_GRIDBAG.gridx = 0;
-//            CONSTRAINTS_GRIDBAG.gridy = i + 1;
-//            this.add(labels[i], CONSTRAINTS_GRIDBAG);
-//
-//            textFields[i] = new JTextField();
-//            textFields[i].setColumns(25);
-//            CONSTRAINTS_GRIDBAG.gridx = 1;
-//            CONSTRAINTS_GRIDBAG.gridy = i + 1;
-//            this.add(textFields[i], CONSTRAINTS_GRIDBAG);
-//        }
-//
-//        CONSTRAINTS_GRIDBAG.insets = new Insets(10, 10, 10, 10);
-//        searchButton = new JButton("SEARCH");
-//        searchButton.addActionListener(this);
-//        CONSTRAINTS_GRIDBAG.gridx = 0;
-//        CONSTRAINTS_GRIDBAG.gridy = labelStrings.length + 1;
-//        this.add(searchButton, CONSTRAINTS_GRIDBAG);
-//
-//        cancelButton = new JButton("CANCEL");
-//        cancelButton.addActionListener(this);
-//        CONSTRAINTS_GRIDBAG.gridx = 1;
-//        CONSTRAINTS_GRIDBAG.gridy = labelStrings.length + 1;
-//        this.add(cancelButton, CONSTRAINTS_GRIDBAG);
-//
-//        header = new JLabel("SEARCH STUDENT");
-//        header.setFont(FONT_BOLD);
-//        CONSTRAINTS_GRIDBAG.insets = new Insets(10, 10, 10, 10);
-//        CONSTRAINTS_GRIDBAG.gridx = 0;
-//        CONSTRAINTS_GRIDBAG.gridy = 0;
-//        CONSTRAINTS_GRIDBAG.gridwidth = GridBagConstraints.REMAINDER;
-//        this.add(header, CONSTRAINTS_GRIDBAG);
-//    }
-
     public void actionPerformed(View view) {
         Button clickedButton = (Button) view;
         if (clickedButton.getText().equals("Search")) {
@@ -110,9 +51,9 @@ public class SearchActivity extends AppCompatActivity {
             matchedIndex = new HashMap<>();
             setSearchTags();
 
-//            for (int i = 0; i < searchTags.size(); i++) {
-//                Log.i("actionPerformed", i + " -> " + searchTags.get(i));
-//            }
+            for (int i = 0; i < searchTags.size(); i++) {
+                Log.i("SearchActivity", "actionPerformed : " + i + " -> " + searchTags.get(i));
+            }
 
             matchedIndex.put(searchTags.get(0), searchByName());
             matchedIndex.put(searchTags.get(1), searchByRegNo());
@@ -121,24 +62,26 @@ public class SearchActivity extends AppCompatActivity {
             matchedIndex.put(searchTags.get(4), searchByGender());
             // showMap();
 
-//            Log.i("actionPerformed", "Intersection of " + searchTags.get(0) + " and " + searchTags.get(1) + " -> ");
+//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of " + searchTags.get(0) + " and " + searchTags.get(1) + " -> ");
             finalSearch = intersect(matchedIndex.get(searchTags.get(0)), matchedIndex.get(searchTags.get(1)));
 //            printList(finalSearch);
 
-//            Log.i("actionPerformed", "Intersection of intersect and " + searchTags.get(2) + " -> ");
+//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and " + searchTags.get(2) + " -> ");
             finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(2)));
 //            printList(finalSearch);
 
-//            Log.i("actionPerformed", "Intersection of intersect and " + searchTags.get(3) + " -> ");
+//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and " + searchTags.get(3) + " -> ");
             finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(3)));
 //            printList(finalSearch);
 
-//            Log.i("actionPerformed", "Intersection of intersect and " + searchTags.get(4) + " -> ");
+//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and " + searchTags.get(4) + " -> ");
             finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(4)));
-//            printList(finalSearch);
+            printList(finalSearch);
+
+            Toast.makeText(MainActivity.getContext(), "Search is Ended", Toast.LENGTH_SHORT).show();
         } else if (clickedButton.getText().equals("Cancel")) {
             Toast.makeText(MainActivity.getContext(), "Cancel is Clicked", Toast.LENGTH_SHORT).show();
-            Log.i("actionPerformed", "Cancel Button Clicked");
+            Log.i("SearchActivity", "actionPerformed : " + "Cancel Button Clicked");
             finish();
         }
     }
@@ -265,21 +208,22 @@ public class SearchActivity extends AppCompatActivity {
 
     public <T> void printList(ArrayList<T> list) {
         if (list != null) {
-            Log.i("printList", "Start");
+            Log.i("SearchActivity", "printList : " + "Start");
+            Log.i("SearchActivity", "printList : " + "size() -> " + list.size());
             for (T t : list) {
-                Log.i("printList", "t -> " + t);
+                Log.i("printList", "printList : " + "t -> " + t);
             }
-            Log.i("printList", "End");
+            Log.i("SearchActivity", "printList : " + "End");
         }
     }
 
     public void showMap() {
         Set<String> keys = matchedIndex.keySet();
         for (String k : keys) {
-            Log.i("showMap", "key -> " + k);
+            Log.i("SearchActivity", "showMap : " + "key -> " + k);
             if (matchedIndex.get(k) != null) {
                 for (int i : matchedIndex.get(k)) {
-                    Log.i("showMap", "value -> " + i);
+                    Log.i("SearchActivity", "showMap : " + "value -> " + i);
                 }
             }
         }

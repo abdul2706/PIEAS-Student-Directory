@@ -20,10 +20,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private LayoutInflater layoutInflater;
     private View view;
     private ArrayList<Student> studentArrayList;
-    private Context context;
+    private MainActivity mainActivity;
 
-    public CustomAdapter(Context context, ArrayList<Student> studentsList){
-        this.context = context;
+    public CustomAdapter(MainActivity mainActivity, ArrayList<Student> studentsList){
+        this.mainActivity = mainActivity;
         studentArrayList = studentsList;
     }
 
@@ -47,10 +47,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "index -> " + index, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, ShowStudentActivity.class);
+                Toast.makeText(MainActivity.getContext(), "index -> " + index, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.getContext(), ShowStudentActivity.class);
                 intent.putExtra("index", index);
-                context.startActivity(intent);
+                mainActivity.startActivityForResult(intent, ShowStudentActivity.SHOW_STUDENT_ACTIVITY);
             }
         });
     }

@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 public class ShowStudentActivity extends AppCompatActivity {
 
+    public static final int SHOW_STUDENT_ACTIVITY = 2;
+
     public void goBack(View view){
         finish();
     }
@@ -19,4 +21,5 @@ public class ShowStudentActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.getContext(), "ShowStudentActivity Started", Toast.LENGTH_SHORT).show();
         Log.i("ShowStudentActivity", "onCreate");
     }
+
 }

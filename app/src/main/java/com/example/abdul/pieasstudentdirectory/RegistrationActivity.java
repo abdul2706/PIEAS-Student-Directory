@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    public static final int REGISTRATION_ACTIVITY = 1;
     private MainActivity mainActivity;
     private String[] labelStrings = { "Name : ", "Registration# : ", "Department : ", "Phone# : ", "Gender : " };
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
