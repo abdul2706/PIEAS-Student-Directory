@@ -1,5 +1,7 @@
 package com.example.abdul.pieasstudentdirectory;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -20,6 +22,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
     private Button addButton, cancelButton;
     private ArrayList<String> inputData = new ArrayList<>();
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class RegistrationActivity extends AppCompatActivity {
         inputEditTexts.add((EditText)findViewById(R.id.genderEditText));
         addButton = findViewById(R.id.addButton);
         cancelButton = findViewById(R.id.cancelButton);
+
+        sharedPreferences = getSharedPreferences("com.example.abdul.pieasstudentdirectory", Context.MODE_PRIVATE);
     }
 
     public void actionPerformed(View view) {
@@ -45,10 +50,10 @@ public class RegistrationActivity extends AppCompatActivity {
             Log.i("actionPerformed", "Add Button Clicked");
             setInputData();
             if (allFieldsFilled() && validateInputData()) {
-                Toast.makeText(MainActivity.getContext(), "Student Added", Toast.LENGTH_SHORT).show();
                 String stringStudent = getInputDataAsString();
                 mainActivity.addStudent(Student.parseStringToStudent(stringStudent));
                 mainActivity.notifyDataSetChanged();
+                Toast.makeText(MainActivity.getContext(), "Student Added", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 Toast.makeText(MainActivity.getContext(), "All Input Fields Not Provided", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,8 @@
 package com.example.abdul.pieasstudentdirectory;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,7 +12,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomAdapter customAdapter;
     private ArrayList<Student> studentArrayList = new ArrayList<>();
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +31,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = this;
-        studentArrayList.add(new Student("ark", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
-        studentArrayList.add(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
+        sharedPreferences = getSharedPreferences("com.example.abdul.pieasstudentdirectory", Context.MODE_PRIVATE);
+
+//        addStudent(new Student("ark", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
+//        addStudent(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
+
+
+        try {
+            studentArrayList = (ArrayList<Student>) ObjectSerializer.deserialize(sharedPreferences.getString("studentArrayList", ObjectSerializer.serialize(new ArrayList<Student>())));
+            Log.i("MainActivity", "size -> " + studentArrayList.size());
+        } catch (Exception e) {
+            Log.i("MainActivity", e.getMessage());
+            e.printStackTrace();
+        }
 
         recyclerView = findViewById(R.id.studentListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,27 +74,22 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.showAll:
-                Log.i("MainActivity", "onOptionsItemSelected" + "case showAll");
+                Log.i("MainActivity", "onOptionsItemSelected : " + "case showAll");
                 setCustomAdapter(new CustomAdapter(this, studentArrayList));
                 break;
             case R.id.search:
-                Log.i("MainActivity", "onOptionsItemSelected" + "case search");
+                Log.i("MainActivity", "onOptionsItemSelected : " + "case search");
                 intent = new Intent(getApplicationContext(), SearchActivity.class);
                 intent.putExtra("studentArrayList", studentArrayList);
                 startActivityForResult(intent, SearchActivity.SEARCH_ACTIVITY);
                 break;
             case R.id.add:
-                Log.i("MainActivity", "onOptionsItemSelected" + "case add");
+                Log.i("MainActivity", "onOptionsItemSelected : " + "case add");
                 intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 startActivityForResult(intent, RegistrationActivity.REGISTRATION_ACTIVITY);
                 break;
-//            case R.id.remove:
-//                Log.i("MainActivity", "onOptionsItemSelected" + "case remove");
-//                customAdapter.notifyDataSetChanged();
-//                studentArrayList.remove(0);
-//                break;
             case R.id.about:
-                Log.i("MainActivity", "onOptionsItemSelected" + "case about");
+                Log.i("MainActivity", "onOptionsItemSelected : " + "case about");
                 new AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("About")
@@ -91,18 +99,18 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 break;
             default:
-                Log.i("MainActivity", "onOptionsItemSelected" + "Returning False (default)");
+                Log.i("MainActivity", "onOptionsItemSelected : " + "Returning False (default)");
                 return false;
         }
-        Log.i("MainActivity", "Returning True");
+        Log.i("MainActivity", "onOptionsItemSelected : " + "Returning True");
         return true;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("MainActivity", "onActivityResult" + "requestCode -> " + requestCode);
-        Log.i("MainActivity", "onActivityResult" + "resultCode -> " + resultCode);
+        Log.i("MainActivity", "onActivityResult : " + "requestCode -> " + requestCode);
+        Log.i("MainActivity", "onActivityResult : " + "resultCode -> " + resultCode);
         Toast.makeText(this, "requestCode -> " + requestCode + "; resultCode -> " + resultCode, Toast.LENGTH_SHORT).show();
         switch (requestCode) {
             case RegistrationActivity.REGISTRATION_ACTIVITY:
@@ -117,6 +125,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void addStudent(Student student) {
         this.studentArrayList.add(student);
+        updateSharedPreferences();
+    }
+
+    public void updateSharedPreferences() {
+        try {
+            sharedPreferences.edit().putString("studentArrayList", ObjectSerializer.serialize(studentArrayList)).apply();
+        } catch (Exception e) {
+            Log.i("MainActivity", "updateSharedPreferences : " + "e.getMessage() -> " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void notifyDataSetChanged() {

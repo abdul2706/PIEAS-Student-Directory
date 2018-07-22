@@ -69,6 +69,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                             public void onClick(DialogInterface dialog, int which) {
                                 studentArrayList.remove(index);
                                 mainActivity.notifyDataSetChanged();
+                                mainActivity.updateSharedPreferences();
                             }
                         })
                         .setNegativeButton("No", null)
