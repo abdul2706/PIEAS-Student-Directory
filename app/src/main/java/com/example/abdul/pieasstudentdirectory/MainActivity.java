@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.studentListRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        customAdapter = new CustomAdapter(this, studentArrayList);
-        recyclerView.setAdapter(customAdapter);
+        setCustomAdapter(new CustomAdapter(this, studentArrayList));
     }
 
     public static MainActivity getContext() {
@@ -61,25 +60,28 @@ public class MainActivity extends AppCompatActivity {
         super.onOptionsItemSelected(item);
         Intent intent;
         switch (item.getItemId()) {
+            case R.id.showAll:
+                Log.i("MainActivity", "onOptionsItemSelected" + "case showAll");
+                setCustomAdapter(new CustomAdapter(this, studentArrayList));
+                break;
             case R.id.search:
-                Log.i("onOptionsItemSelected", "case search");
+                Log.i("MainActivity", "onOptionsItemSelected" + "case search");
                 intent = new Intent(getApplicationContext(), SearchActivity.class);
+                intent.putExtra("studentArrayList", studentArrayList);
                 startActivityForResult(intent, SearchActivity.SEARCH_ACTIVITY);
                 break;
             case R.id.add:
-                Log.i("onOptionsItemSelected", "case add");
+                Log.i("MainActivity", "onOptionsItemSelected" + "case add");
                 intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 startActivityForResult(intent, RegistrationActivity.REGISTRATION_ACTIVITY);
                 break;
-            case R.id.remove:
-                Log.i("onOptionsItemSelected", "case remove");
-                studentArrayList.remove(0);
-                customAdapter.notifyDataSetChanged();
-//                intent = new Intent(getApplicationContext(), ShowStudentActivity.class);
-//                startActivity(intent);
-                break;
+//            case R.id.remove:
+//                Log.i("MainActivity", "onOptionsItemSelected" + "case remove");
+//                customAdapter.notifyDataSetChanged();
+//                studentArrayList.remove(0);
+//                break;
             case R.id.about:
-                Log.i("onOptionsItemSelected", "case about");
+                Log.i("MainActivity", "onOptionsItemSelected" + "case about");
                 new AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("About")
@@ -89,27 +91,41 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 break;
             default:
-                Log.i("onOptionsItemSelected", "Returning False (default)");
+                Log.i("MainActivity", "onOptionsItemSelected" + "Returning False (default)");
                 return false;
         }
-        Log.i("onOptionsItemSelected", "Returning True");
+        Log.i("MainActivity", "Returning True");
         return true;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("onActivityResult", "requestCode -> " + requestCode);
-        Log.i("onActivityResult", "resultCode -> " + resultCode);
+        Log.i("MainActivity", "onActivityResult" + "requestCode -> " + requestCode);
+        Log.i("MainActivity", "onActivityResult" + "resultCode -> " + resultCode);
         Toast.makeText(this, "requestCode -> " + requestCode + "; resultCode -> " + resultCode, Toast.LENGTH_SHORT).show();
+        switch (requestCode) {
+            case RegistrationActivity.REGISTRATION_ACTIVITY:
+                break;
+            case ShowStudentActivity.SHOW_STUDENT_ACTIVITY:
+                break;
+            case SearchActivity.SEARCH_ACTIVITY:
+                break;
+            default:
+        }
     }
 
-    public void addStudent(Student student){
+    public void addStudent(Student student) {
         this.studentArrayList.add(student);
     }
 
-    public void notifyDataSetChanged(){
+    public void notifyDataSetChanged() {
         customAdapter.notifyDataSetChanged();
+    }
+
+    public void setCustomAdapter(CustomAdapter customAdapter) {
+        this.customAdapter = customAdapter;
+        recyclerView.setAdapter(this.customAdapter);
     }
 
 }

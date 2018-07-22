@@ -1,6 +1,8 @@
 package com.example.abdul.pieasstudentdirectory;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +53,27 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 Intent intent = new Intent(MainActivity.getContext(), ShowStudentActivity.class);
                 intent.putExtra("index", index);
                 mainActivity.startActivityForResult(intent, ShowStudentActivity.SHOW_STUDENT_ACTIVITY);
+            }
+        });
+
+        holder.relativeLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(MainActivity.getContext(), "index -> " + index, Toast.LENGTH_SHORT).show();
+                new AlertDialog.Builder(mainActivity)
+                        .setIcon(android.R.drawable.stat_sys_warning)
+                        .setTitle("Warning")
+                        .setMessage("Do you want to delete selected item?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                studentArrayList.remove(index);
+                                mainActivity.notifyDataSetChanged();
+                            }
+                        })
+                        .setNegativeButton("No", null)
+                        .show();
+                return true;
             }
         });
     }

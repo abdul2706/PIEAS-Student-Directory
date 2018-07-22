@@ -18,4 +18,5 @@
     <string name="about">About</string>
     <string name="remove">Remove</string>
     <string name="student_list">Student List</string>
+    <string name="show_all">Show All</string>
 </resources>
