@@ -5,152 +5,230 @@ import java.io.Serializable;
 
 public class Student implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    private static Formatter formatter = new Formatter(System.out);
+    private String studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester,
+            batch, department, email, regNo, gender;
 
-    private String name;
-    private String regNo;
-    private String department;
-    private String phoneNo;
-    private String gender;
-//    private ImageIcon imageIcon;
-
-    // Constructors
     public Student() {
-        this("", "", "", "00000000000", "-");
+        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A",
+                "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526",
+                "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com",
+                "03310032017", "Male");
     }
 
     public Student(Student std) {
-        this(std.name, std.regNo, std.department, std.phoneNo, std.gender);
+        this(std.studentName, std.fatherName, std.roomNo, std.hostel, std.address, std.bloodGroup,
+                std.phoneNo, std.semester, std.batch, std.department, std.email, std.regNo, std.gender);
     }
 
-    public Student(String name, String regNo, String department, String phoneNo, String gender) {
-        setName(name);
-        setRegNo(regNo);
-        setDepartment(department);
+    public Student(String studentName, String fatherName, String roomNo, String hostel, String address,
+                   String bloodGroup, String phoneNo, String semester, String batch, String department,
+                   String email, String regNo, String gender) {
+        setStudentName(studentName);
+        setFatherName(fatherName);
+        setRoomNo(roomNo);
+        setHostel(hostel);
+        setAddress(address);
+        setBloodGroup(bloodGroup);
         setPhoneNo(phoneNo);
+        setSemester(semester);
+        setBatch(batch);
+        setDepartment(department);
+        setEmail(email);
+        setRegNo(regNo);
         setGender(gender);
     }
 
-    // Setters
-    public void setName(String name) {
-        this.name = name;
+    public String getStudentName() {
+        return studentName;
     }
 
-    public void setRegNo(String regNo) {
-        this.regNo = createValidFormatRegNo(regNo);
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
 
-    public void setDepartment(String department) {
-		this.department = createValidFormatDepartment(department);
+    public String getFatherName() {
+        return fatherName;
     }
 
-    public void setPhoneNo(String phoneNo) {
-		this.phoneNo = createValidFormatPhoneNo(phoneNo);
-//        this.phoneNo = phoneNo;
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
     }
 
-    public void setGender(String gender) {
-        this.gender = createValidFormatGender(gender);
+    public String getRoomNo() {
+        return roomNo;
     }
 
-//    public void setImageIcon(String icon) {
-//        this.imageIcon = new ImageIcon(icon);
-//    }
-
-    // Getters
-    public String getName() {
-        return name;
+    public void setRoomNo(String roomNo) {
+        this.roomNo = roomNo;
     }
 
-    public String getRegNo() {
-        return regNo;
+    public String getHostel() {
+        return hostel;
     }
 
-    public String getDepartment() {
-        return department;
+    public void setHostel(String hostel) {
+        this.hostel = hostel;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
     }
 
     public String getPhoneNo() {
         return phoneNo;
     }
 
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+
+    public String getBatch() {
+        return batch;
+    }
+
+    public void setBatch(String batch) {
+        this.batch = batch;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRegNo() {
+        return regNo;
+    }
+
+    public void setRegNo(String regNo) {
+        this.regNo = regNo;
+    }
+
     public String getGender() {
         return gender;
     }
 
-//    public ImageIcon getImageIcon() {
-//        return imageIcon;
-//    }
-
-    public void showStudent() {
-        System.out.println("--------------------------------------------------");
-        formatter.format("%25s", "Name -> ");
-        formatter.format("%25s", name);
-        System.out.println();
-        formatter.format("%25s", "Registration# -> ");
-        formatter.format("%25s", regNo);
-        System.out.println();
-        formatter.format("%25s", "Department -> ");
-        formatter.format("%25s", department);
-        System.out.println();
-        formatter.format("%25s", "Phone#-> ");
-        formatter.format("%25s", phoneNo);
-        System.out.println();
-        formatter.format("%25s", "Gender -> ");
-        formatter.format("%25s", gender);
-        System.out.println();
-        formatter.format("%25s", "ImageIcon -> ");
-//        formatter.format("%25s", imageIcon.toString());
-        System.out.println();
-        // formatter.format("%25s", imageIcon);System.out.println();
-        System.out.println("--------------------------------------------------");
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    // Override Method
     @Override
     public String toString() {
-        return "\n------------------------------" + "\n" + "Name -> " + this.name + "\n" + "Registration# -> "
-                + this.regNo + "\n" + "Department -> " + this.department + "\n" + "Phone# -> " + phoneNo + "\n"
-                + "Gender -> " + this.gender + "\n" + "------------------------------\n";
+        //studentName, fatherName, roomNo, hostel, address, bloodGroup,
+        //phoneNo, semester, batch, department, email, regNo, gender;
+        return "studentName -> " + studentName + "\n" +
+                "fatherName -> " + fatherName + "\n" +
+                "roomNo -> " + roomNo + "\n" +
+                "hostel -> " + hostel + "\n" +
+                "address -> " + address + "\n" +
+                "bloodGroup -> " + bloodGroup + "\n" +
+                "phoneNo -> " + phoneNo + "\n" +
+                "semester -> " + semester + "\n" +
+                "batch -> " + batch + "\n" +
+                "department -> " + department + "\n" +
+                "email -> " + email + "\n" +
+                "regNo -> " + regNo + "\n" +
+                "gender -> " + gender + "\n";
     }
 
     @Override
     public boolean equals(Object std) {
+        //studentName, fatherName, roomNo, hostel, address, bloodGroup,
+        //phoneNo, semester, batch, department, email, regNo, gender;
         Student student = (Student) std;
-        return this.name.equals(student.getName()) &&
+        return this.studentName.equals(student.getStudentName()) &&
+                this.fatherName.equals(student.getFatherName()) &&
+                this.roomNo.equals(student.getRoomNo()) &&
+                this.hostel.equals(student.getHostel()) &&
+                this.address.equals(student.getAddress()) &&
+                this.bloodGroup.equals(student.getBloodGroup()) &&
+                this.phoneNo.equals(student.getPhoneNo()) &&
+                this.semester.equals(student.getSemester()) &&
+                this.batch.equals(student.getBatch()) &&
+                this.department.equals(student.getDepartment()) &&
+                this.email.equals(student.getEmail()) &&
                 this.regNo.equals(student.getRegNo()) &&
-                this.department.equals(student.getDepartment()) && this.phoneNo.equals(student.getPhoneNo()) &&
                 this.gender.equals(student.getGender());
     }
 
     // Static Methods
     public static String parseStudentToString(Student std) {
-        return std.name + ";" + std.regNo + ";" + std.department + ";" + std.phoneNo + ";" + std.gender + ";";
+        return std.studentName + ',' + std.fatherName + ',' + std.roomNo + ',' + std.hostel + ',' +
+                std.address + ',' + std.bloodGroup + ',' + std.phoneNo + ',' + std.semester + ',' +
+                std.batch + ',' + std.department + ',' + std.email + ',' + std.regNo + ',' + std.gender;
     }
 
     public static Student parseStringToStudent(String line) {
-        String name = line.substring(0, line.indexOf(";"));
+        String studentName = line.substring(0, line.indexOf(";"));
         line = line.substring(line.indexOf(";") + 1);
 
-        String regNo = line.substring(0, line.indexOf(";"));
+        String fatherName = line.substring(0, line.indexOf(";"));
         line = line.substring(line.indexOf(";") + 1);
 
-        String department = line.substring(0, line.indexOf(";"));
+        String roomNo = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
+        String hostel = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
+        String address = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
+        String bloodGroup = line.substring(0, line.indexOf(";"));
         line = line.substring(line.indexOf(";") + 1);
 
         String phoneNo = line.substring(0, line.indexOf(";"));
         line = line.substring(line.indexOf(";") + 1);
 
+        String semester = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
+        String batch = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
+        String department = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
+        String email = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
+        String regNo = line.substring(0, line.indexOf(";"));
+        line = line.substring(line.indexOf(";") + 1);
+
         String gender = line.substring(0, line.indexOf(";"));
 
-        return new Student(name, regNo, department, phoneNo, gender);
-    }
-
-    public static void showStudents(List<Student> students) {
-        for (Student s : students) {
-            s.showStudent();
-        }
+        return new Student(studentName, fatherName, roomNo, hostel, address, bloodGroup,
+                phoneNo, semester, batch, department, email, regNo, gender);
     }
 
     public static void sortByRegNo(List<Student> students) {
@@ -173,20 +251,6 @@ public class Student implements Serializable {
             }
         }
         return null;
-    }
-
-    public static Object[][] create2DData(List<Student> students) {
-        Object[][] data2D = new Object[students.size()][7];
-        for (int i = 0; i < students.size(); i++) {
-            data2D[i][0] = Integer.toString(i + 1);
-            data2D[i][1] = students.get(i).getRegNo();
-            data2D[i][2] = students.get(i).getName();
-            data2D[i][3] = students.get(i).getDepartment();
-            data2D[i][4] = students.get(i).getPhoneNo();
-            data2D[i][5] = students.get(i).getGender();
-//            data2D[i][6] = students.get(i).getImageIcon();
-        }
-        return data2D;
     }
 
     public static String createValidFormatRegNo(String regNo) {

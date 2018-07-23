@@ -116,7 +116,7 @@ public class SearchActivity extends AppCompatActivity {
         if (searchTags.get(0).length() != 0) {
             Log.i("SearchActivity", "searchByName : " + "searchTags.get(0) -> " + searchTags.get(0));
             for (int i = 0; i < studentList.size(); i++) {
-                if (studentList.get(i).getName().toLowerCase().contains(searchTags.get(0).toLowerCase())) {
+                if (studentList.get(i).getStudentName().toLowerCase().contains(searchTags.get(0).toLowerCase())) {
                     Log.i("SearchActivity", "searchByName : " + i + "th student's name contains " + searchTags.get(0));
                     matchedStudents.add(i);
                 }

@@ -40,8 +40,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.i("onBindViewHolder", "position -> " + position);
-        holder.imageView.setImageResource(R.drawable.ic_launcher_foreground);
-        holder.nameTextView.setText(studentArrayList.get(position).getName());
+        holder.imageView.setImageResource(R.drawable.android_logo);
+        holder.nameTextView.setText(studentArrayList.get(position).getStudentName());
         holder.departTextView.setText(studentArrayList.get(position).getDepartment());
         holder.regNoTextView.setText(studentArrayList.get(position).getRegNo());
 

@@ -33,17 +33,6 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         sharedPreferences = getSharedPreferences("com.example.abdul.pieasstudentdirectory", Context.MODE_PRIVATE);
 
-//        addStudent(new Student("ark", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul", "03-3-1-001-2017", "BSME", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul Rehman", "03-3-1-002-2017", "EE", "0331-1205526", "Male"));
-//        addStudent(new Student("Abdul Rehman Khan", "03-3-1-003-2017", "cis", "0331-1205526", "Male"));
-
-
         try {
             studentArrayList = (ArrayList<Student>) ObjectSerializer.deserialize(sharedPreferences.getString("studentArrayList", ObjectSerializer.serialize(new ArrayList<Student>())));
             Log.i("MainActivity", "size -> " + studentArrayList.size());

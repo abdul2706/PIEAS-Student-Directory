@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +17,7 @@ public class ShowStudentActivity extends AppCompatActivity {
     private MainActivity mainActivity;
     private ImageView studentImageView;
     private TextView studentNameTextView, fatherNameTextView, roomAndHostelTextView, permanentAddressTextView, bloodGroupTextView,
-            contactTextView, semesterTextView, batchTextView, departmentTextView, emailTextView, regNoTextView, genderTextView, studentWordsTextView;
+            contactTextView, semesterTextView, batchTextView, departmentTextView, emailTextView, regNoTextView, genderTextView;
     private Student student;
 
     @Override
@@ -54,19 +55,99 @@ public class ShowStudentActivity extends AppCompatActivity {
         emailTextView = findViewById(R.id.emailTextView);
         regNoTextView = findViewById(R.id.regNoTextView);
         genderTextView = findViewById(R.id.genderTextView);
-        studentWordsTextView = findViewById(R.id.studentWordsTextView);
+
+        studentNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        fatherNameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        roomAndHostelTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        permanentAddressTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        bloodGroupTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        contactTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        semesterTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        batchTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        departmentTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        emailTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        regNoTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        genderTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, ((TextView)v).getText().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void setViews() {
+        studentImageView.setImageResource(R.drawable.android_logo);
+        studentNameTextView.setText(student.getStudentName());
+        fatherNameTextView.setText(student.getFatherName());
+        roomAndHostelTextView.setText(student.getHostel() + "-" + student.getRoomNo());
+        permanentAddressTextView.setText(student.getAddress());
+        bloodGroupTextView.setText("Blood Group : " + student.getBloodGroup());
+        contactTextView.setText(student.getPhoneNo());
+        semesterTextView.setText(student.getSemester());
+        batchTextView.setText(student.getBatch());
+        departmentTextView.setText(student.getDepartment());
+        emailTextView.setText(student.getEmail());
+        regNoTextView.setText(student.getRegNo());
+        genderTextView.setText(student.getGender());
     }
 
     public void goBack(View view) {
         finish();
-    }
-
-    public void setViews() {
-        studentImageView.setImageResource(R.drawable.hassan_sattar);
-        studentNameTextView.setText(student.getName());
-        regNoTextView.setText(student.getRegNo());
-        contactTextView.setText(student.getPhoneNo());
-        genderTextView.setText(student.getGender());
     }
 
 }

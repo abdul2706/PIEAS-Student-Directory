@@ -132,7 +132,7 @@
         app:layout_constraintStart_toStartOf="@+id/semesterTextView" />
 
     <TextView
-        android:id="@+id/departementTextView"
+        android:id="@+id/departmentTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -151,7 +151,8 @@
         android:textColor="@android:color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/email"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/departementTextView" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/departmentTextView" />
 
     <TextView
         android:id="@+id/regNoTextView"
@@ -170,61 +171,42 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="@string/reg_no"
+        android:text="@string/male_female"
         android:textColor="@android:color/black"
         app:layout_constraintBaseline_toBaselineOf="@+id/gender"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/regNoTextView" />
 
-    <TextView
-        android:id="@+id/studentWordsTextView"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:background="@android:color/holo_blue_bright"
-        android:text="Some words from student:\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.!"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registrationNo" />
-
     <Button
         android:id="@+id/callBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="@android:color/holo_green_light"
         android:onClick="goBack"
         android:text="Call"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/studentWordsTextView"
-        app:layout_constraintTop_toBottomOf="@+id/studentWordsTextView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/msgBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="@android:color/holo_orange_light"
         android:onClick="goBack"
         android:text="Message"
         android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/studentWordsTextView"
-        app:layout_constraintStart_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/studentWordsTextView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
     <TextView
         android:id="@+id/contact"
@@ -275,7 +257,7 @@
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/departementTextView"
+        app:layout_constraintEnd_toStartOf="@+id/departmentTextView"
         app:layout_constraintTop_toBottomOf="@+id/batch" />
 
     <TextView
@@ -289,7 +271,7 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/emailTextView"
-        app:layout_constraintTop_toBottomOf="@+id/department" />
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
 
     <TextView
         android:id="@+id/registrationNo"
@@ -302,7 +284,7 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/regNoTextView"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/department" />
 
     <TextView
         android:id="@+id/gender"

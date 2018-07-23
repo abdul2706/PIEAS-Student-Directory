@@ -18,7 +18,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public static final int REGISTRATION_ACTIVITY = 1;
     private MainActivity mainActivity;
-    private String[] labelStrings = { "Name : ", "Registration# : ", "Department : ", "Phone# : ", "Gender : " };
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
     private Button addButton, cancelButton;
     private ArrayList<String> inputData = new ArrayList<>();
@@ -33,10 +32,18 @@ public class RegistrationActivity extends AppCompatActivity {
         Log.i("RegistrationActivity", "onCreate");
         mainActivity = MainActivity.getContext();
 
-        inputEditTexts.add((EditText)findViewById(R.id.nameEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.regNoEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.departmentEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.studentNameEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.fatherNameEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.roomEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.hostelEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.addressEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.bloodGroupEditText));
         inputEditTexts.add((EditText)findViewById(R.id.phoneNoEditView));
+        inputEditTexts.add((EditText)findViewById(R.id.semesterEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.batchEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.departmentEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.emailEditText));
+        inputEditTexts.add((EditText)findViewById(R.id.regNoEditText));
         inputEditTexts.add((EditText)findViewById(R.id.genderEditText));
         addButton = findViewById(R.id.addButton);
         cancelButton = findViewById(R.id.cancelButton);
