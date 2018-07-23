@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public Student getStudent(int index) {
+        return studentArrayList.get(index);
+    }
+
     public void addStudent(Student student) {
         this.studentArrayList.add(student);
         updateSharedPreferences();
