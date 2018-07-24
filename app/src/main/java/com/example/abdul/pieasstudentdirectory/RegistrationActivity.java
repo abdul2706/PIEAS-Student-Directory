@@ -2,6 +2,7 @@ package com.example.abdul.pieasstudentdirectory;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -19,17 +20,13 @@ public class RegistrationActivity extends AppCompatActivity {
     public static final int REGISTRATION_ACTIVITY = 1;
     private MainActivity mainActivity;
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
-    private Button addButton, cancelButton;
     private ArrayList<String> inputData = new ArrayList<>();
-    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        Toast.makeText(MainActivity.getContext(), "RegistrationActivity Started", Toast.LENGTH_SHORT).show();
-        Log.i("RegistrationActivity", "onCreate");
         mainActivity = MainActivity.getContext();
 
         inputEditTexts.add((EditText)findViewById(R.id.studentNameEditText));
@@ -45,10 +42,6 @@ public class RegistrationActivity extends AppCompatActivity {
         inputEditTexts.add((EditText)findViewById(R.id.emailEditText));
         inputEditTexts.add((EditText)findViewById(R.id.regNoEditText));
         inputEditTexts.add((EditText)findViewById(R.id.genderEditText));
-        addButton = findViewById(R.id.addButton);
-        cancelButton = findViewById(R.id.cancelButton);
-
-        sharedPreferences = getSharedPreferences("com.example.abdul.pieasstudentdirectory", Context.MODE_PRIVATE);
     }
 
     public void actionPerformed(View view) {
@@ -58,7 +51,8 @@ public class RegistrationActivity extends AppCompatActivity {
             setInputData();
             if (allFieldsFilled() && validateInputData()) {
                 String stringStudent = getInputDataAsString();
-                mainActivity.addStudent(Student.parseStringToStudent(stringStudent));
+                mainActivity.insertStudent(Student.parseStringToStudent(stringStudent));
+                mainActivity.getStudentFromDatabase();
                 mainActivity.notifyDataSetChanged();
                 Toast.makeText(MainActivity.getContext(), "Student Added", Toast.LENGTH_SHORT).show();
                 finish();

@@ -1,7 +1,6 @@
 package com.example.abdul.pieasstudentdirectory;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -19,12 +18,10 @@ import java.util.ArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
-    private LayoutInflater layoutInflater;
-    private View view;
     private ArrayList<Student> studentArrayList;
     private MainActivity mainActivity;
 
-    public CustomAdapter(MainActivity mainActivity, ArrayList<Student> studentsList){
+    public CustomAdapter(MainActivity mainActivity, ArrayList<Student> studentsList) {
         this.mainActivity = mainActivity;
         studentArrayList = studentsList;
     }
@@ -32,8 +29,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        layoutInflater = LayoutInflater.from(parent.getContext());
-        view = layoutInflater.inflate(R.layout.list_item_layout, parent, false);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.list_item_layout, parent, false);
         return new ViewHolder(view);
     }
 
@@ -67,9 +64,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                studentArrayList.remove(index);
+                                mainActivity.deleteStudent(index);
+                                mainActivity.getStudentFromDatabase();
                                 mainActivity.notifyDataSetChanged();
-                                mainActivity.updateSharedPreferences();
                             }
                         })
                         .setNegativeButton("No", null)
@@ -90,6 +87,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         TextView nameTextView;
         TextView departTextView;
         TextView regNoTextView;
+
         public ViewHolder(View itemView) {
             super(itemView);
             relativeLayout = itemView.findViewById(R.id.itemRelativeLayout);

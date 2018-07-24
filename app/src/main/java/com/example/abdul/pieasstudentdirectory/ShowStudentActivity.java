@@ -25,8 +25,6 @@ public class ShowStudentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_showstudent);
 
-        Toast.makeText(MainActivity.getContext(), "ShowStudentActivity Started", Toast.LENGTH_SHORT).show();
-        Log.i("ShowStudentActivity", "onCreate");
         mainActivity = MainActivity.getContext();
         initViews();
 

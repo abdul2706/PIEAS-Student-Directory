@@ -2,7 +2,8 @@ package com.example.abdul.pieasstudentdirectory;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CustomAdapter customAdapter;
     private ArrayList<Student> studentArrayList = new ArrayList<>();
-    private SharedPreferences sharedPreferences;
+    private SQLiteDatabase sqLiteDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +32,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = this;
-        sharedPreferences = getSharedPreferences("com.example.abdul.pieasstudentdirectory", Context.MODE_PRIVATE);
-
         try {
-            studentArrayList = (ArrayList<Student>) ObjectSerializer.deserialize(sharedPreferences.getString("studentArrayList", ObjectSerializer.serialize(new ArrayList<Student>())));
-            Log.i("MainActivity", "size -> " + studentArrayList.size());
+            sqLiteDatabase = openOrCreateDatabase("StudentData", Context.MODE_PRIVATE, null);
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS studentTable (id INTEGER PRIMARY KEY, studentName VARCHAR, fatherName VARCHAR, roomNo VARCHAR, hostel VARCHAR, address VARCHAR, bloodGroup VARCHAR, phoneNo VARCHAR, semester VARCHAR, batch VARCHAR, department VARCHAR, email VARCHAR, regNo VARCHAR, gender VARCHAR)");
+            getStudentFromDatabase();
         } catch (Exception e) {
             Log.i("MainActivity", e.getMessage());
             e.printStackTrace();
@@ -87,6 +87,19 @@ public class MainActivity extends AppCompatActivity {
                         .setNegativeButton("", null)
                         .show();
                 break;
+            case R.id.addStudent:
+                Log.i("MainActivity", "onOptionsItemSelected : " + "case addStudent");
+                insertStudent(new Student("ARK", "Tanveer Ahmed Khan", "204", "A", "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526", "1", "18-22", "dee", "abdulrehmankhan27061998@gmail.com", "03310032017", "Male"));
+                insertStudent(new Student("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A", "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526", "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com", "03310032017", "Male"));
+                getStudentFromDatabase();
+                notifyDataSetChanged();
+                break;
+            case R.id.deleteTable:
+                Log.i("MainActivity", "onOptionsItemSelected : " + "case deleteTable");
+                sqLiteDatabase.execSQL("DELETE FROM studentTable");
+                studentArrayList.clear();
+                notifyDataSetChanged();
+                break;
             default:
                 Log.i("MainActivity", "onOptionsItemSelected : " + "Returning False (default)");
                 return false;
@@ -118,16 +131,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void addStudent(Student student) {
         this.studentArrayList.add(student);
-        updateSharedPreferences();
     }
 
-    public void updateSharedPreferences() {
-        try {
-            sharedPreferences.edit().putString("studentArrayList", ObjectSerializer.serialize(studentArrayList)).apply();
-        } catch (Exception e) {
-            Log.i("MainActivity", "updateSharedPreferences : " + "e.getMessage() -> " + e.getMessage());
-            e.printStackTrace();
-        }
+    public void insertStudent(Student std) {
+        sqLiteDatabase.execSQL("INSERT INTO studentTable (studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender) VALUES (" + Student.parseStudentToString(std) + ")");
+    }
+
+    public void deleteStudent(int index) {
+        sqLiteDatabase.execSQL("DELETE FROM studentTable WHERE regNo = '" + studentArrayList.get(index).getRegNo() + "'");
+    }
+
+    public void getStudentFromDatabase() {
+        String studentAsString;
+        studentArrayList.clear();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM studentTable", null);
+        cursor.moveToFirst();
+        do {
+            studentAsString = "";
+            for (int i = 1; i < cursor.getColumnNames().length; i++) {
+                studentAsString += cursor.getString(i) + ";";
+            }
+            addStudent(Student.parseStringToStudent(studentAsString));
+        } while (cursor.moveToNext());
+        cursor.close();
     }
 
     public void notifyDataSetChanged() {

@@ -19,9 +19,7 @@ public class SearchActivity extends AppCompatActivity {
     public static final int SEARCH_ACTIVITY = 3;
 
     private MainActivity mainActivity;
-    private String[] labelStrings = {"Name : ", "Registration# : ", "Department : ", "Phone# : ", "Gender : "};
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
-    private Button addButton, cancelButton;
     private ArrayList<String> searchTags = new ArrayList<>();
 
     private HashMap<String, ArrayList<Integer>> matchedIndex;
@@ -33,8 +31,6 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        Toast.makeText(MainActivity.getContext(), "SearchActivity Started", Toast.LENGTH_SHORT).show();
-        Log.i("SearchActivity", "onCreate");
 
         Intent intent = getIntent();
         studentList = (ArrayList<Student>) intent.getExtras().get("studentArrayList");
@@ -45,8 +41,6 @@ public class SearchActivity extends AppCompatActivity {
         inputEditTexts.add((EditText) findViewById(R.id.departmentEditText));
         inputEditTexts.add((EditText) findViewById(R.id.phoneNoEditView));
         inputEditTexts.add((EditText) findViewById(R.id.genderEditText));
-        addButton = findViewById(R.id.addButton);
-        cancelButton = findViewById(R.id.cancelButton);
     }
 
     public void actionPerformed(View view) {

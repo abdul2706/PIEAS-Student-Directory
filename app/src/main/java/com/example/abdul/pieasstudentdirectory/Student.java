@@ -1,12 +1,8 @@
 package com.example.abdul.pieasstudentdirectory;
 
-import java.util.*;
-import java.io.Serializable;
+public class Student {
 
-public class Student implements Serializable {
-
-    private String studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester,
-            batch, department, email, regNo, gender;
+    private String studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender;
 
     public Student() {
         this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A",
@@ -43,7 +39,7 @@ public class Student implements Serializable {
     }
 
     public void setStudentName(String studentName) {
-        this.studentName = studentName;
+        this.studentName = studentName.toUpperCase();
     }
 
     public String getFatherName() {
@@ -51,7 +47,7 @@ public class Student implements Serializable {
     }
 
     public void setFatherName(String fatherName) {
-        this.fatherName = fatherName;
+        this.fatherName = fatherName.toUpperCase();
     }
 
     public String getRoomNo() {
@@ -67,7 +63,7 @@ public class Student implements Serializable {
     }
 
     public void setHostel(String hostel) {
-        this.hostel = hostel;
+        this.hostel = hostel.toUpperCase();
     }
 
     public String getAddress() {
@@ -75,7 +71,7 @@ public class Student implements Serializable {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = address.toUpperCase();
     }
 
     public String getBloodGroup() {
@@ -83,7 +79,7 @@ public class Student implements Serializable {
     }
 
     public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup;
+        this.bloodGroup = bloodGroup.toUpperCase();
     }
 
     public String getPhoneNo() {
@@ -91,7 +87,7 @@ public class Student implements Serializable {
     }
 
     public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo;
+        this.phoneNo = getValidPhoneNo(phoneNo);
     }
 
     public String getSemester() {
@@ -115,7 +111,7 @@ public class Student implements Serializable {
     }
 
     public void setDepartment(String department) {
-        this.department = department;
+        this.department = getValidDepartment(department);
     }
 
     public String getEmail() {
@@ -131,7 +127,7 @@ public class Student implements Serializable {
     }
 
     public void setRegNo(String regNo) {
-        this.regNo = regNo;
+        this.regNo = getValidRegNo(regNo);
     }
 
     public String getGender() {
@@ -139,7 +135,7 @@ public class Student implements Serializable {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.gender = getValidGender(gender);
     }
 
     @Override
@@ -158,7 +154,7 @@ public class Student implements Serializable {
                 "department -> " + department + "\n" +
                 "email -> " + email + "\n" +
                 "regNo -> " + regNo + "\n" +
-                "gender -> " + gender + "\n";
+                "gender -> " + gender;
     }
 
     @Override
@@ -183,9 +179,9 @@ public class Student implements Serializable {
 
     // Static Methods
     public static String parseStudentToString(Student std) {
-        return std.studentName + ',' + std.fatherName + ',' + std.roomNo + ',' + std.hostel + ',' +
-                std.address + ',' + std.bloodGroup + ',' + std.phoneNo + ',' + std.semester + ',' +
-                std.batch + ',' + std.department + ',' + std.email + ',' + std.regNo + ',' + std.gender;
+        return "'" + std.studentName + "', '" + std.fatherName + "', '" + std.roomNo + "', '" + std.hostel + "', '" +
+                std.address + "', '" + std.bloodGroup + "', '" + std.phoneNo + "', '" + std.semester + "', '" + std.batch + "', '" +
+                std.department + "', '" + std.email + "', '" + std.regNo + "', '" + std.gender + "'";
     }
 
     public static Student parseStringToStudent(String line) {
@@ -227,118 +223,18 @@ public class Student implements Serializable {
 
         String gender = line.substring(0, line.indexOf(";"));
 
-        return new Student(studentName, fatherName, roomNo, hostel, address, bloodGroup,
-                phoneNo, semester, batch, department, email, regNo, gender);
+        return new Student(studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender);
     }
 
-    public static void sortByRegNo(List<Student> students) {
-        Student temp;
-        for (int i = 0; i < students.size(); i++) {
-            for (int j = 1; j < students.size() - i; j++) {
-                if (students.get(j - 1).getRegNo().equals(students.get(j).getRegNo())) {
-                    temp = new Student(students.get(j - 1));
-                    students.set(j - 1, students.get(j));
-                    students.set(j, temp);
-                }
-            }
-        }
-    }
-
-    public static Student searchStudentByRegNo(List<Student> students, String rNo) {
-        for (Student s : students) {
-            if (s.getRegNo().equals(rNo)) {
-                return s;
-            }
-        }
-        return null;
-    }
-
-    public static String createValidFormatRegNo(String regNo) {
-        String oldRegNo = removeChar(regNo, ' ');
-        oldRegNo = removeChar(oldRegNo, '-');
-        String newRegNo = "";
-        int count = 0;
-        if (isValidRegNo(regNo)) {
-            for (int i = 0; i < 15; i++) {
-                if (i == 2 || i == 4 || i == 6 || i == 10) {
-                    newRegNo += '-';
-                } else {
-                    newRegNo += oldRegNo.charAt(count);
-                    count++;
-                }
-            }
+    public static String getValidRegNo(String regNo) {
+        String newRegNo = "empty";
+        if (regNo.length() == 11) {
+            newRegNo = regNo.substring(0, 2) + "-" + regNo.substring(2, 3) + "-" + regNo.substring(3, 4) + "-" + regNo.substring(4, 7) + "-" + regNo.substring(7);
         }
         return newRegNo;
     }
 
-    public static boolean isValidRegNo(String regNo) {
-        regNo = removeChar(regNo, ' ');
-        boolean result = false;
-        if (regNo.length() < 11 || regNo.length() > 15) {
-//			System.out.println(1);
-            result = false;
-        } else if (regNo.length() == 11 && countChar(regNo, '-') == 0 && countInts(regNo) == 11) {
-//			System.out.println(2);
-            result = true;
-        } else if (regNo.length() == 12 && countChar(regNo, '-') == 1 && countInts(regNo) == 11) {
-//			System.out.println(3);
-            int location1 = regNo.indexOf('-');
-            if (location1 == 2 || location1 == 3 || location1 == 4 || location1 == 7) {
-                result = true;
-            }
-        } else if (regNo.length() == 13 && countChar(regNo, '-') == 2 && countInts(regNo) == 11) {
-//			System.out.println(4);
-            int location1 = regNo.indexOf('-');
-            int location2 = regNo.substring(location1 + 1).indexOf('-') + location1 + 1;
-            if (location1 == 2) {
-                if (location2 == 4 || location2 == 5 || location2 == 8) {
-                    result = true;
-                }
-            } else if (location1 == 3) {
-                if (location2 == 5 || location2 == 8) {
-                    result = true;
-                }
-            } else if (location1 == 4) {
-                if (location2 == 8) {
-                    result = true;
-                }
-            }
-        } else if (regNo.length() == 14 && countChar(regNo, '-') == 3 && countInts(regNo) == 11) {
-//			System.out.println(5);
-            int location1 = regNo.indexOf('-');
-            int location2 = regNo.substring(location1 + 1).indexOf('-') + location1 + 1;
-            int location3 = regNo.substring(location2 + 1).indexOf('-') + location2 + 1;
-//			System.out.println("location1 -> " + location1);
-//			System.out.println("location2 -> " + location2);
-//			System.out.println("location3 -> " + location3);
-            if (location1 == 2 && location2 == 4 && location3 == 6) {
-                result = true;
-            } else if (location1 == 2 && location2 == 4 && location3 == 9) {
-                result = true;
-            } else if (location1 == 2 && location2 == 5 && location3 == 9) {
-                result = true;
-            } else if (location1 == 3 && location2 == 5 && location3 == 9) {
-                result = true;
-            }
-//			System.out.println(5);
-        } else if (regNo.length() == 15 && countChar(regNo, '-') == 4 && countInts(regNo) == 11) {
-//			System.out.println(6);
-            int location1 = regNo.indexOf('-');
-            int location2 = regNo.substring(location1 + 1).indexOf('-') + location1 + 1;
-            int location3 = regNo.substring(location2 + 1).indexOf('-') + location2 + 1;
-            int location4 = regNo.substring(location3 + 1).indexOf('-') + location3 + 1;
-//			System.out.println("location1 -> " + location1);
-//			System.out.println("location2 -> " + location2);
-//			System.out.println("location3 -> " + location3);
-//			System.out.println("location4 -> " + location4);
-            if (location1 == 2 && location2 == 4 && location3 == 6 && location4 == 10) {
-                result = true;
-            }
-        }
-        return result;
-    }
-
-    public static String createValidFormatDepartment(String department) {
+    public static String getValidDepartment(String department) {
         String oldDepartment = removeChar(department, ' ').toLowerCase();
         String newDepartment = "";
         String[] validDepartments = {"ee", "me", "cis"};
@@ -354,65 +250,22 @@ public class Student implements Serializable {
         return newDepartment;
     }
 
-    public static boolean isValidDepartment(String department) {
-        department = removeChar(department.toLowerCase(), ' ');
-        String[] validDepartments = {"ee", "me", "cis"};
-        boolean result = false;
-
-        for (int i = 0; i < validDepartments.length; i++) {
-            if (department.contains(validDepartments[i])) {
-                result = true;
-                break;
-            }
+    public static String getValidPhoneNo(String phoneNo) {
+        String newPhoneNo = "empty";
+        if (phoneNo.length() == 11) {
+            newPhoneNo = phoneNo.substring(0, 4) + "-" + phoneNo.substring(4);
         }
-
-        return result;
-    }
-
-    public static String createValidFormatPhoneNo(String phoneNo) {
-        String oldPhoneNo = removeChar(phoneNo, ' ');
-        oldPhoneNo = removeChar(oldPhoneNo, '-');
-        String newPhoneNo = "";
-
-        int count = 0;
-        if (isValidPhoneNo(phoneNo)) {
-            for (int i = 0; i < 15; i++) {
-                if (i == 2 || i == 4 || i == 6 || i == 10) {
-                    newPhoneNo += '-';
-                } else {
-                    newPhoneNo += oldPhoneNo.charAt(count);
-                    count++;
-                }
-            }
-        }
-
         return newPhoneNo;
     }
 
-    public static boolean isValidPhoneNo(String phoneNo) {
-        phoneNo = removeChar(phoneNo, ' ');
-        boolean result = false;
-        return result;
-    }
-
-    public static String createValidFormatGender(String gender) {
-        String oldGender = removeChar(gender.toLowerCase(), ' ');
-        String newGender = "";
-        if (oldGender.charAt(0) == 'm') {
+    public static String getValidGender(String gender) {
+        String newGender = "empty";
+        if (gender.charAt(0) == 'm') {
             newGender = "MALE";
-        } else if (oldGender.charAt(0) == 'f') {
+        } else if (gender.charAt(0) == 'f') {
             newGender = "FEMALE";
         }
         return newGender;
-    }
-
-    public static boolean isValidGender(String gender) {
-        gender = removeChar(gender.toLowerCase(), ' ');
-        boolean result = false;
-        if (gender.charAt(0) == 'm' || gender.charAt(0) == 'f') {
-            result = true;
-        }
-        return result;
     }
 
     public static int countInts(String string) {
