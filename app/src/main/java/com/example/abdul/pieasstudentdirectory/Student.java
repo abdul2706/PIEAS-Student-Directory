@@ -1,20 +1,22 @@
 package com.example.abdul.pieasstudentdirectory;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
 
     private String studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender;
 
-    public Student() {
-        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A",
-                "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526",
-                "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com",
-                "03310032017", "Male");
-    }
-
-    public Student(Student std) {
-        this(std.studentName, std.fatherName, std.roomNo, std.hostel, std.address, std.bloodGroup,
-                std.phoneNo, std.semester, std.batch, std.department, std.email, std.regNo, std.gender);
-    }
+//    public Student() {
+//        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A",
+//                "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526",
+//                "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com",
+//                "03310032017", "Male");
+//    }
+//
+//    public Student(Student std) {
+//        this(std.studentName, std.fatherName, std.roomNo, std.hostel, std.address, std.bloodGroup,
+//                std.phoneNo, std.semester, std.batch, std.department, std.email, std.regNo, std.gender);
+//    }
 
     public Student(String studentName, String fatherName, String roomNo, String hostel, String address,
                    String bloodGroup, String phoneNo, String semester, String batch, String department,
@@ -63,7 +65,7 @@ public class Student {
     }
 
     public void setHostel(String hostel) {
-        this.hostel = hostel.toUpperCase();
+        this.hostel = getValidHostel(hostel.toUpperCase());
     }
 
     public String getAddress() {
@@ -95,7 +97,7 @@ public class Student {
     }
 
     public void setSemester(String semester) {
-        this.semester = semester;
+        this.semester = getValidSemester(semester);
     }
 
     public String getBatch() {
@@ -135,7 +137,7 @@ public class Student {
     }
 
     public void setGender(String gender) {
-        this.gender = getValidGender(gender);
+        this.gender = getValidGender(gender.toLowerCase());
     }
 
     @Override
@@ -161,20 +163,23 @@ public class Student {
     public boolean equals(Object std) {
         //studentName, fatherName, roomNo, hostel, address, bloodGroup,
         //phoneNo, semester, batch, department, email, regNo, gender;
-        Student student = (Student) std;
-        return this.studentName.equals(student.getStudentName()) &&
-                this.fatherName.equals(student.getFatherName()) &&
-                this.roomNo.equals(student.getRoomNo()) &&
-                this.hostel.equals(student.getHostel()) &&
-                this.address.equals(student.getAddress()) &&
-                this.bloodGroup.equals(student.getBloodGroup()) &&
-                this.phoneNo.equals(student.getPhoneNo()) &&
-                this.semester.equals(student.getSemester()) &&
-                this.batch.equals(student.getBatch()) &&
-                this.department.equals(student.getDepartment()) &&
-                this.email.equals(student.getEmail()) &&
-                this.regNo.equals(student.getRegNo()) &&
-                this.gender.equals(student.getGender());
+        if(std instanceof Student) {
+            Student student = (Student) std;
+            return this.studentName.equals(student.getStudentName()) &&
+                    this.fatherName.equals(student.getFatherName()) &&
+                    this.roomNo.equals(student.getRoomNo()) &&
+                    this.hostel.equals(student.getHostel()) &&
+                    this.address.equals(student.getAddress()) &&
+                    this.bloodGroup.equals(student.getBloodGroup()) &&
+                    this.phoneNo.equals(student.getPhoneNo()) &&
+                    this.semester.equals(student.getSemester()) &&
+                    this.batch.equals(student.getBatch()) &&
+                    this.department.equals(student.getDepartment()) &&
+                    this.email.equals(student.getEmail()) &&
+                    this.regNo.equals(student.getRegNo()) &&
+                    this.gender.equals(student.getGender());
+        }
+        return false;
     }
 
     // Static Methods
@@ -226,76 +231,67 @@ public class Student {
         return new Student(studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender);
     }
 
-    public static String getValidRegNo(String regNo) {
-        String newRegNo = "empty";
-        if (regNo.length() == 11) {
-            newRegNo = regNo.substring(0, 2) + "-" + regNo.substring(2, 3) + "-" + regNo.substring(3, 4) + "-" + regNo.substring(4, 7) + "-" + regNo.substring(7);
-        }
-        return newRegNo;
+    private static String getValidHostel(String hostel) {
+        return isValidHostel(hostel.toUpperCase()) ? hostel : "invalid";
     }
 
-    public static String getValidDepartment(String department) {
-        String oldDepartment = removeChar(department, ' ').toLowerCase();
-        String newDepartment = "";
-        String[] validDepartments = {"ee", "me", "cis"};
-
-        if (oldDepartment.contains(validDepartments[0])) {
-            newDepartment = "DEE";
-        } else if (oldDepartment.contains(validDepartments[1])) {
-            newDepartment = "DME";
-        } else if (oldDepartment.contains(validDepartments[2])) {
-            newDepartment = "DCIS";
-        }
-
-        return newDepartment;
+    public static boolean isValidHostel(String hostel) {
+        return hostel.contains("A") || hostel.contains("B") || hostel.contains("E") || hostel.contains("C") || hostel.contains("G") || hostel.contains("H") || hostel.contains("J");
     }
 
-    public static String getValidPhoneNo(String phoneNo) {
-        String newPhoneNo = "empty";
-        if (phoneNo.length() == 11) {
-            newPhoneNo = phoneNo.substring(0, 4) + "-" + phoneNo.substring(4);
-        }
-        return newPhoneNo;
+    private static String getValidPhoneNo(String phoneNo) {
+        return isValidPhoneNo(phoneNo) ? phoneNo.substring(0, 4) + "-" + phoneNo.substring(4) : phoneNo;
     }
 
-    public static String getValidGender(String gender) {
-        String newGender = "empty";
+    public static boolean isValidPhoneNo(String phoneNo) {
+        return phoneNo.length() == 11 && !phoneNo.contains("-");
+    }
+
+    private static String getValidSemester(String semester) {
+        return isValidSemester(semester) ? semester : "invalid";
+    }
+
+    public static boolean isValidSemester(String semester) {
+        return semester.compareTo("0") > 0 && semester.compareTo("9") < 0;
+    }
+
+    private static String getValidDepartment(String department) {
+        department = department.toLowerCase();
+        if (department.contains("ee")) {
+            return "DEE";
+        } else if (department.contains("me")) {
+            return  "DME";
+        } else if (department.contains("cis") || department.contains("cs")) {
+            return "DCIS";
+        } else {
+            return "invalid";
+        }
+    }
+
+    public static boolean isValidDepartment(String department) {
+        return department.contains("ee") || department.contains("me") || department.contains("cis") || department.contains("cs");
+    }
+
+    private static String getValidRegNo(String regNo) {
+        return isValidRegNo(regNo) ? regNo.substring(0, 2) + "-" + regNo.substring(2, 3) + "-" + regNo.substring(3, 4) + "-" + regNo.substring(4, 7) + "-" + regNo.substring(7) : regNo;
+    }
+
+    public static boolean isValidRegNo(String regNo) {
+        return regNo.length() == 11 && !regNo.contains("-");
+    }
+
+    private static String getValidGender(String gender) {
         if (gender.charAt(0) == 'm') {
-            newGender = "MALE";
+            return "MALE";
         } else if (gender.charAt(0) == 'f') {
-            newGender = "FEMALE";
+            return "FEMALE";
+        } else {
+            return "empty";
         }
-        return newGender;
     }
 
-    public static int countInts(String string) {
-        int count = 0;
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) >= 48 && string.charAt(i) <= 57) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public static int countChar(String string, char ch) {
-        int count = 0;
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) == ch) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public static String removeChar(String string, char ch) {
-        String newString = "";
-        for (int i = 0; i < string.length(); i++) {
-            if (string.charAt(i) != ch) {
-                newString += string.charAt(i);
-            }
-        }
-        return newString;
+    public static boolean isValidGender(String gender) {
+        return gender.toLowerCase().charAt(0) == 'm' || gender.toLowerCase().charAt(0) == 'f';
     }
 
 }

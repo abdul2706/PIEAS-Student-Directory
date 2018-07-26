@@ -1,11 +1,6 @@
 package com.example.abdul.pieasstudentdirectory;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +12,7 @@ import java.util.ArrayList;
 
 public class RegistrationActivity extends AppCompatActivity {
 
+    private static final String TAG = "RegistrationActivity";
     public static final int REGISTRATION_ACTIVITY = 1;
     private MainActivity mainActivity;
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
@@ -28,40 +24,55 @@ public class RegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
 
         mainActivity = MainActivity.getContext();
+        initViews();
+    }
 
-        inputEditTexts.add((EditText)findViewById(R.id.studentNameEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.fatherNameEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.roomEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.hostelEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.addressEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.bloodGroupEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.phoneNoEditView));
-        inputEditTexts.add((EditText)findViewById(R.id.semesterEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.batchEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.departmentEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.emailEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.regNoEditText));
-        inputEditTexts.add((EditText)findViewById(R.id.genderEditText));
+    public void initViews() {
+        inputEditTexts.clear();
+        inputEditTexts.add((EditText) findViewById(R.id.studentNameEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.fatherNameEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.roomEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.hostelEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.addressEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.bloodGroupEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.contactNoEditView));
+        inputEditTexts.add((EditText) findViewById(R.id.semesterEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.batchEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.departmentEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.emailEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.regNoEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.genderEditText));
     }
 
     public void actionPerformed(View view) {
         Button clickedButton = (Button) view;
         if (clickedButton.getText().equals("Add")) {
-            Log.i("actionPerformed", "Add Button Clicked");
+            Log.i(TAG, "Add Button Clicked");
             setInputData();
-            if (allFieldsFilled() && validateInputData()) {
-                String stringStudent = getInputDataAsString();
-                mainActivity.insertStudent(Student.parseStringToStudent(stringStudent));
-                mainActivity.getStudentFromDatabase();
-                mainActivity.notifyDataSetChanged();
-                Toast.makeText(MainActivity.getContext(), "Student Added", Toast.LENGTH_SHORT).show();
-                finish();
+            if (allFieldsFilled()) {
+                if (isValidData()) {
+                    Student student = new Student(inputData.get(0), inputData.get(1), inputData.get(2), inputData.get(3), inputData.get(4), inputData.get(5), inputData.get(6), inputData.get(7), inputData.get(8), inputData.get(9), inputData.get(10), inputData.get(11), inputData.get(12));
+                    mainActivity.insertStudent(student);
+                    mainActivity.getStudentFromDatabase();
+                    mainActivity.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.getContext(), "Student Added", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(MainActivity.getContext(), "Invalid Data Provided", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(MainActivity.getContext(), "All Input Fields Not Provided", Toast.LENGTH_SHORT).show();
             }
         } else if (clickedButton.getText().equals("Cancel")) {
-            Log.i("actionPerformed", "Cancel Button Clicked");
+            Log.i(TAG, "Cancel Button Clicked");
             finish();
+        }
+    }
+
+    public void setInputData() {
+        inputData.clear();
+        for (int i = 0; i < inputEditTexts.size(); i++) {
+            inputData.add(inputEditTexts.get(i).getText().toString());
         }
     }
 
@@ -86,24 +97,13 @@ public class RegistrationActivity extends AppCompatActivity {
         return true;
     }
 
-    public void setInputData() {
-        inputData.clear();
-        for(int i = 0; i < inputEditTexts.size(); i++) {
-            inputData.add(inputEditTexts.get(i).getText().toString());
-        }
-    }
-
-    public String getInputDataAsString() {
-        String stringData = "";
-        for (int i = 0; i < inputData.size(); i++) {
-            stringData += inputData.get(i) + ";";
-        }
-        return stringData;
-    }
-
-    public boolean validateInputData() {
-        boolean result = true;
-        return result;
+    public boolean isValidData() {
+        return Student.isValidHostel(inputData.get(3).toUpperCase()) &&
+                Student.isValidPhoneNo(inputData.get(6)) &&
+                Student.isValidSemester(inputData.get(7)) &&
+                Student.isValidDepartment(inputData.get(9)) &&
+                Student.isValidRegNo(inputData.get(11)) &&
+                Student.isValidGender(inputData.get(12));
     }
 
 }

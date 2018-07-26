@@ -19,6 +19,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     public static MainActivity context;
 
     private RecyclerView recyclerView;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS studentTable (id INTEGER PRIMARY KEY, studentName VARCHAR, fatherName VARCHAR, roomNo VARCHAR, hostel VARCHAR, address VARCHAR, bloodGroup VARCHAR, phoneNo VARCHAR, semester VARCHAR, batch VARCHAR, department VARCHAR, email VARCHAR, regNo VARCHAR, gender VARCHAR)");
             getStudentFromDatabase();
         } catch (Exception e) {
-            Log.i("MainActivity", e.getMessage());
+            Log.i(TAG, e.getMessage());
             e.printStackTrace();
         }
 
@@ -63,22 +64,22 @@ public class MainActivity extends AppCompatActivity {
         Intent intent;
         switch (item.getItemId()) {
             case R.id.showAll:
-                Log.i("MainActivity", "onOptionsItemSelected : " + "case showAll");
+                Log.i(TAG, "onOptionsItemSelected : " + "case showAll");
                 setCustomAdapter(new CustomAdapter(this, studentArrayList));
                 break;
             case R.id.search:
-                Log.i("MainActivity", "onOptionsItemSelected : " + "case search");
+                Log.i(TAG, "onOptionsItemSelected : " + "case search");
                 intent = new Intent(getApplicationContext(), SearchActivity.class);
                 intent.putExtra("studentArrayList", studentArrayList);
                 startActivityForResult(intent, SearchActivity.SEARCH_ACTIVITY);
                 break;
             case R.id.add:
-                Log.i("MainActivity", "onOptionsItemSelected : " + "case add");
+                Log.i(TAG, "onOptionsItemSelected : " + "case add");
                 intent = new Intent(getApplicationContext(), RegistrationActivity.class);
                 startActivityForResult(intent, RegistrationActivity.REGISTRATION_ACTIVITY);
                 break;
             case R.id.about:
-                Log.i("MainActivity", "onOptionsItemSelected : " + "case about");
+                Log.i(TAG, "onOptionsItemSelected : " + "case about");
                 new AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("About")
@@ -88,31 +89,31 @@ public class MainActivity extends AppCompatActivity {
                         .show();
                 break;
             case R.id.addStudent:
-                Log.i("MainActivity", "onOptionsItemSelected : " + "case addStudent");
-                insertStudent(new Student("ARK", "Tanveer Ahmed Khan", "204", "A", "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526", "1", "18-22", "dee", "abdulrehmankhan27061998@gmail.com", "03310032017", "Male"));
-                insertStudent(new Student("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A", "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526", "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com", "03310032017", "Male"));
+                Log.i(TAG, "onOptionsItemSelected : " + "case addStudent");
+                insertStudent(new Student("ARK", "Tanveer Ahmed Khan", "204", "A", "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526", "1", "18-22", "dee", "abdulrehmankhan27061998@gmail.com", "03310012018", "M"));
+                insertStudent(new Student("Abdul Rehman Khan", "Tanveer Ahmed Khan", "207", "E", "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526", "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com", "03310032017", "M"));
                 getStudentFromDatabase();
                 notifyDataSetChanged();
                 break;
             case R.id.deleteTable:
-                Log.i("MainActivity", "onOptionsItemSelected : " + "case deleteTable");
+                Log.i(TAG, "onOptionsItemSelected : " + "case deleteTable");
                 sqLiteDatabase.execSQL("DELETE FROM studentTable");
                 studentArrayList.clear();
                 notifyDataSetChanged();
                 break;
             default:
-                Log.i("MainActivity", "onOptionsItemSelected : " + "Returning False (default)");
+                Log.i(TAG, "onOptionsItemSelected : " + "Returning False (default)");
                 return false;
         }
-        Log.i("MainActivity", "onOptionsItemSelected : " + "Returning True");
+        Log.i(TAG, "onOptionsItemSelected : " + "Returning True");
         return true;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i("MainActivity", "onActivityResult : " + "requestCode -> " + requestCode);
-        Log.i("MainActivity", "onActivityResult : " + "resultCode -> " + resultCode);
+        Log.i(TAG, "onActivityResult : " + "requestCode -> " + requestCode);
+        Log.i(TAG, "onActivityResult : " + "resultCode -> " + resultCode);
         Toast.makeText(this, "requestCode -> " + requestCode + "; resultCode -> " + resultCode, Toast.LENGTH_SHORT).show();
         switch (requestCode) {
             case RegistrationActivity.REGISTRATION_ACTIVITY:
@@ -141,18 +142,32 @@ public class MainActivity extends AppCompatActivity {
         sqLiteDatabase.execSQL("DELETE FROM studentTable WHERE regNo = '" + studentArrayList.get(index).getRegNo() + "'");
     }
 
+    public void updateStudent(String value) {
+        sqLiteDatabase.execSQL("UPDATE studentTable SET studentName = 'ARK' WHERE studentName = 'ABDUL REHMAN KHAN'");
+    }
+
+    public Cursor selectStudent(String query) {
+//        return sqLiteDatabase.rawQuery("SELECT * FROM studentTable WHERE " + "studentName = 'Abdul Rehman Khan' AND fatherName = 'Tanveer Ahmed Khan' AND roomNo = '207' AND hostel = 'E' AND address = 'khaqan St#1, Arif Colony, Gill Road, GRW' AND bloodGroup = 'A+' AND phoneNo = '03311205526' AND semester = '3' AND batch = '17-21' AND department = 'DCIS' AND email = 'abdulrehmankhan27061998@gmail.com' AND regNo = '03310032017' AND gender = 'M'", null);
+        Log.i(TAG, "selectStudent : " + "SELECT * FROM studentTable WHERE " + query);
+        return sqLiteDatabase.rawQuery("SELECT * FROM studentTable WHERE " + query, null);
+//        return sqLiteDatabase.rawQuery("SELECT * FROM studentTable WHERE studentName LIKE UPPER('%Abdul%')", null);
+    }
+
     public void getStudentFromDatabase() {
-        String studentAsString;
+        StringBuilder studentAsString;
         studentArrayList.clear();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM studentTable", null);
         cursor.moveToFirst();
-        do {
-            studentAsString = "";
-            for (int i = 1; i < cursor.getColumnNames().length; i++) {
-                studentAsString += cursor.getString(i) + ";";
-            }
-            addStudent(Student.parseStringToStudent(studentAsString));
-        } while (cursor.moveToNext());
+        Log.i(TAG, "getCount : " + cursor.getCount());
+        if (cursor.getCount() != 0) {
+            do {
+                studentAsString = new StringBuilder();
+                for (int i = 1; i < cursor.getColumnNames().length; i++) {
+                    studentAsString.append(cursor.getString(i)).append(";");
+                }
+                addStudent(Student.parseStringToStudent(studentAsString.toString()));
+            } while (cursor.moveToNext());
+        }
         cursor.close();
     }
 

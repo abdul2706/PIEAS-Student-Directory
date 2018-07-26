@@ -1,6 +1,7 @@
 package com.example.abdul.pieasstudentdirectory;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -17,10 +18,11 @@ import java.util.Set;
 public class SearchActivity extends AppCompatActivity {
 
     public static final int SEARCH_ACTIVITY = 3;
-
+    //    "SELECT * FROM studentTable WHERE " + "studentName = 'Abdul Rehman Khan' AND fatherName = 'Tanveer Ahmed Khan' AND roomNo = '207' AND hostel = 'E' AND address = 'khaqan St#1, Arif Colony, Gill Road, GRW' AND bloodGroup = 'A+' AND phoneNo = '03311205526' AND semester = '3' AND batch = '17-21' AND department = 'DCIS' AND email = 'abdulrehmankhan27061998@gmail.com' AND regNo = '03310032017' AND gender = 'M'";
     private MainActivity mainActivity;
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
     private ArrayList<String> searchTags = new ArrayList<>();
+    private ArrayList<String> databaseColumns = new ArrayList<>();
 
     private HashMap<String, ArrayList<Integer>> matchedIndex;
     private ArrayList<Student> studentList;
@@ -35,55 +37,85 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = getIntent();
         studentList = (ArrayList<Student>) intent.getExtras().get("studentArrayList");
         mainActivity = MainActivity.getContext();
+        initViews();
+    }
 
-        inputEditTexts.add((EditText) findViewById(R.id.nameEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.regNoEditText));
+    public void initViews() {
+        inputEditTexts.clear();
+        inputEditTexts.add((EditText) findViewById(R.id.studentNameEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.fatherNameEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.roomEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.hostelEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.addressEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.bloodGroupEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.contactNoEditView));
+        inputEditTexts.add((EditText) findViewById(R.id.semesterEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.batchEditText));
         inputEditTexts.add((EditText) findViewById(R.id.departmentEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.phoneNoEditView));
+        inputEditTexts.add((EditText) findViewById(R.id.emailEditText));
+        inputEditTexts.add((EditText) findViewById(R.id.regNoEditText));
         inputEditTexts.add((EditText) findViewById(R.id.genderEditText));
+
+//        studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender
+        databaseColumns.add("studentName");
+        databaseColumns.add("fatherName");
+        databaseColumns.add("roomNo");
+        databaseColumns.add("hostel");
+        databaseColumns.add("address");
+        databaseColumns.add("bloodGroup");
+        databaseColumns.add("phoneNo");
+        databaseColumns.add("semester");
+        databaseColumns.add("batch");
+        databaseColumns.add("department");
+        databaseColumns.add("email");
+        databaseColumns.add("regNo");
+        databaseColumns.add("gender");
     }
 
     public void actionPerformed(View view) {
         Button clickedButton = (Button) view;
         if (clickedButton.getText().equals("Search")) {
             Toast.makeText(MainActivity.getContext(), "Search is Clicked", Toast.LENGTH_SHORT).show();
-
-            matchedIndex = new HashMap<>();
             setSearchTags();
+            Log.i("SearchActivity", "query -> " + createQuery());
+            searchSQLiteDatabase(createQuery());
 
-//            for (int i = 0; i < searchTags.size(); i++) {
-//                Log.i("SearchActivity", "actionPerformed : " + i + " -> " + searchTags.get(i));
+//            matchedIndex = new HashMap<>();
+//            setSearchTags();
+//
+////            for (int i = 0; i < searchTags.size(); i++) {
+////                Log.i("SearchActivity", "actionPerformed : " + i + " -> " + searchTags.get(i));
+////            }
+//
+//            matchedIndex.put(searchTags.get(0), searchByName());
+//            matchedIndex.put(searchTags.get(1), searchByRegNo());
+//            matchedIndex.put(searchTags.get(2), searchByDepartment());
+//            matchedIndex.put(searchTags.get(3), searchByPhoneNo());
+//            matchedIndex.put(searchTags.get(4), searchByGender());
+////            showMap();
+//
+////            Log.i("SearchActivity", "actionPerformed : " + "Intersection of searchTags.get(0) and searchTags.get(1) -> ");
+//            finalSearch = intersect(matchedIndex.get(searchTags.get(0)), matchedIndex.get(searchTags.get(1)));
+////            printList(finalSearch);
+//
+////            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and searchTags.get(2) -> ");
+//            finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(2)));
+////            printList(finalSearch);
+//
+////            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and searchTags.get(3) -> ");
+//            finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(3)));
+////            printList(finalSearch);
+//
+////            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and searchTags.get(4) -> ");
+//            finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(4)));
+////            printList(finalSearch);
+//
+//            Toast.makeText(MainActivity.getContext(), finalSearch.size() + " Match Found", Toast.LENGTH_SHORT).show();
+//            if(finalSearch.size() != 0){
+//                setSearchedStudentList();
+//                mainActivity.setCustomAdapter(new CustomAdapter(mainActivity, searchedStudentList));
+//                finish();
 //            }
-
-            matchedIndex.put(searchTags.get(0), searchByName());
-            matchedIndex.put(searchTags.get(1), searchByRegNo());
-            matchedIndex.put(searchTags.get(2), searchByDepartment());
-            matchedIndex.put(searchTags.get(3), searchByPhoneNo());
-            matchedIndex.put(searchTags.get(4), searchByGender());
-//            showMap();
-
-//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of searchTags.get(0) and searchTags.get(1) -> ");
-            finalSearch = intersect(matchedIndex.get(searchTags.get(0)), matchedIndex.get(searchTags.get(1)));
-//            printList(finalSearch);
-
-//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and searchTags.get(2) -> ");
-            finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(2)));
-//            printList(finalSearch);
-
-//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and searchTags.get(3) -> ");
-            finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(3)));
-//            printList(finalSearch);
-
-//            Log.i("SearchActivity", "actionPerformed : " + "Intersection of intersect and searchTags.get(4) -> ");
-            finalSearch = intersect(finalSearch, matchedIndex.get(searchTags.get(4)));
-//            printList(finalSearch);
-
-            Toast.makeText(MainActivity.getContext(), finalSearch.size() + " Match Found", Toast.LENGTH_SHORT).show();
-            if(finalSearch.size() != 0){
-                setSearchedStudentList();
-                mainActivity.setCustomAdapter(new CustomAdapter(mainActivity, searchedStudentList));
-                finish();
-            }
         } else if (clickedButton.getText().equals("Cancel")) {
             Toast.makeText(MainActivity.getContext(), "Cancel is Clicked", Toast.LENGTH_SHORT).show();
             Log.i("SearchActivity", "actionPerformed : " + "Cancel Button Clicked");
@@ -92,10 +124,43 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public void setSearchedStudentList() {
-        for (Integer i : finalSearch) {
-            searchedStudentList.add(studentList.get(i));
+    public String createQuery() {
+        StringBuilder queryBuilder = new StringBuilder();
+        String queryPart;
+        boolean firstAND = false;
+        for (int i = 0; i < searchTags.size(); i++) {
+            if(!searchTags.get(i).equals("")) {
+                if (i > 0 && firstAND) {
+                    queryBuilder.append(" AND ");
+                }
+                queryPart = databaseColumns.get(i) + " LIKE UPPER('%" + searchTags.get(i) + "%')";
+                queryBuilder.append(queryPart);
+                firstAND = true;
+            }
         }
+        return queryBuilder.toString();
+    }
+
+    public void searchSQLiteDatabase(String query) {
+        Cursor cursor = mainActivity.selectStudent(query);
+        StringBuilder studentAsString;
+        searchedStudentList.clear();
+        cursor.moveToFirst();
+        Log.i("SearchActivity", "searchSQLiteDatabase : " + "cursor.getCount() -> " + cursor.getCount());
+        if (cursor.getCount() != 0) {
+            Toast.makeText(mainActivity, cursor.getCount() + " Match Found", Toast.LENGTH_SHORT).show();
+            do {
+                studentAsString = new StringBuilder();
+                for (int i = 1; i < cursor.getColumnNames().length; i++) {
+                    studentAsString.append(cursor.getString(i)).append(";");
+                }
+                searchedStudentList.add(Student.parseStringToStudent(studentAsString.toString()));
+            } while (cursor.moveToNext());
+        } else {
+            Log.i("SearchActivity", "searchSQLiteDatabase : " + "No Match Found");
+            Toast.makeText(mainActivity, "No Match Found", Toast.LENGTH_SHORT).show();
+        }
+        cursor.close();
     }
 
     public void setSearchTags() {
@@ -105,119 +170,27 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    public ArrayList<Integer> searchByName() {
-        ArrayList<Integer> matchedStudents = new ArrayList<>();
-        if (searchTags.get(0).length() != 0) {
-            Log.i("SearchActivity", "searchByName : " + "searchTags.get(0) -> " + searchTags.get(0));
-            for (int i = 0; i < studentList.size(); i++) {
-                if (studentList.get(i).getStudentName().toLowerCase().contains(searchTags.get(0).toLowerCase())) {
-                    Log.i("SearchActivity", "searchByName : " + i + "th student's name contains " + searchTags.get(0));
-                    matchedStudents.add(i);
-                }
-            }
-        }
-        return matchedStudents;
-    }
-
-    public ArrayList<Integer> searchByRegNo() {
-        ArrayList<Integer> matchedStudents = new ArrayList<>();
-        if (searchTags.get(1).length() != 0) {
-            Log.i("SearchActivity", "searchByRegNo : " + "searchTags.get(1) -> " + searchTags.get(1));
-            for (int i = 0; i < studentList.size(); i++) {
-                if (studentList.get(i).getRegNo().toLowerCase().equals(searchTags.get(1).toLowerCase())) {
-                    Log.i("SearchActivity", "searchByRegNo : " + i + "th student's regNo is " + searchTags.get(1));
-                    matchedStudents.add(i);
-                }
-            }
-        }
-        return matchedStudents;
-    }
-
-    public ArrayList<Integer> searchByDepartment() {
-        ArrayList<Integer> matchedStudents = new ArrayList<>();
-        if (searchTags.get(2).length() != 0) {
-            Log.i("SearchActivity", "searchByDepartment : " + "searchTags.get(2) -> " + searchTags.get(2));
-            for (int i = 0; i < studentList.size(); i++) {
-                if (studentList.get(i).getDepartment().toLowerCase().contains(searchTags.get(2).toLowerCase())) {
-                    Log.i("SearchActivity", "searchByDepartment : " + i + "th student's department contains " + searchTags.get(2));
-                    matchedStudents.add(i);
-                }
-            }
-        }
-        return matchedStudents;
-    }
-
-    public ArrayList<Integer> searchByPhoneNo() {
-        ArrayList<Integer> matchedStudents = new ArrayList<>();
-        if (searchTags.get(3).length() != 0) {
-            Log.i("SearchActivity", "searchByPhoneNo : " + "searchTags.get(3) -> " + searchTags.get(3));
-            for (int i = 0; i < studentList.size(); i++) {
-                if (studentList.get(i).getPhoneNo().toLowerCase().equals(searchTags.get(3).toLowerCase())) {
-                    Log.i("SearchActivity", "searchByPhoneNo : " + i + "th student's phoneNo is " + searchTags.get(3));
-                    matchedStudents.add(i);
-                }
-            }
-        }
-        return matchedStudents;
-    }
-
-    public ArrayList<Integer> searchByGender() {
-        ArrayList<Integer> matchedStudents = new ArrayList<>();
-        if (searchTags.get(4).length() != 0) {
-            Log.i("SearchActivity", "searchByGender : " + "searchTags.get(4) -> " + searchTags.get(4));
-            for (int i = 0; i < studentList.size(); i++) {
-                if (studentList.get(i).getGender().toLowerCase().charAt(0) == searchTags.get(4).toLowerCase().charAt(0)) {
-                    Log.i("SearchActivity", "searchByName : " + i + "th student's gender contains " + searchTags.get(4));
-                    matchedStudents.add(i);
-                }
-            }
-        }
-        return matchedStudents;
-    }
-
-    public ArrayList<Integer> intersect(ArrayList<Integer> list1, ArrayList<Integer> list2) {
-        ArrayList<Integer> intersection = new ArrayList<>();
-
-        if (list1.size() != 0 && list2.size() == 0) {
-            Log.i("SearchActivity", "intersect : " + "list1 is not empty and list2 is empty");
-            return list1;
-        } else if (list1.size() == 0 && list2.size() != 0) {
-            Log.i("SearchActivity", "intersect : " + "list2 is not empty and list1 is empty");
-            return list2;
-        } else {
-            for (int i = 0; i < list1.size(); i++) {
-                for (int j = 0; j < list2.size(); j++) {
-                    if (list1.get(i).equals(list2.get(j))) {
-                        intersection.add(list1.get(i));
-                        break;
-                    }
-                }
-            }
-            return intersection;
-        }
-    }
-
-    public <T> void printList(ArrayList<T> list) {
-        if (list != null) {
-            Log.i("SearchActivity", "printList : " + "Start");
-            Log.i("SearchActivity", "printList : " + "size() -> " + list.size());
-            for (T t : list) {
-                Log.i("SearchActivity", "printList : " + "t -> " + t);
-            }
-            Log.i("SearchActivity", "printList : " + "End");
-        }
-    }
-
-    public void showMap() {
-        Set<String> keys = matchedIndex.keySet();
-        for (String k : keys) {
-            Log.i("SearchActivity", "showMap : " + "key -> " + k);
-            if (matchedIndex.get(k) != null) {
-                for (int i : matchedIndex.get(k)) {
-                    Log.i("SearchActivity", "showMap : " + "value -> " + i);
-                }
-            }
-        }
-    }
+//    public <T> void printList(ArrayList<T> list) {
+//        if (list != null) {
+//            Log.i("SearchActivity", "printList : " + "Start");
+//            Log.i("SearchActivity", "printList : " + "size() -> " + list.size());
+//            for (T t : list) {
+//                Log.i("SearchActivity", "printList : " + "t -> " + t);
+//            }
+//            Log.i("SearchActivity", "printList : " + "End");
+//        }
+//    }
+//
+//    public void showMap() {
+//        Set<String> keys = matchedIndex.keySet();
+//        for (String k : keys) {
+//            Log.i("SearchActivity", "showMap : " + "key -> " + k);
+//            if (matchedIndex.get(k) != null) {
+//                for (int i : matchedIndex.get(k)) {
+//                    Log.i("SearchActivity", "showMap : " + "value -> " + i);
+//                }
+//            }
+//        }
+//    }
 
 }

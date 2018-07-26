@@ -45,13 +45,14 @@
                     android:id="@+id/studentNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/gradient_filled_rectangle"
-                    android:padding="8dp"
                     android:text="@string/student_name"
+                    android:background="@drawable/gradient_filled_rectangle"
                     android:textAllCaps="true"
+                    android:layout_margin="8dp"
+                    android:padding="8dp"
                     android:textColor="#000000"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    />
 
                 <EditText
                     android:id="@+id/studentNameEditText"
@@ -255,14 +256,14 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/phoneNoEditView"
+                    android:id="@+id/contactNoEditView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/black_boundary"
                     android:ems="10"
                     android:hint="@string/phone_no"
-                    android:inputType="number|phone"
+                    android:inputType="number"
                     android:maxLength="11"
                     android:padding="8dp"
                     android:textColor="#000000"
@@ -296,7 +297,7 @@
                     android:background="@drawable/black_boundary"
                     android:ems="10"
                     android:hint="@string/_1_8"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:maxLength="1"
                     android:padding="8dp"
                     android:textColor="#000000"
@@ -330,7 +331,7 @@
                     android:background="@drawable/black_boundary"
                     android:ems="10"
                     android:hint="@string/batchNo"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:maxLength="5"
                     android:padding="8dp"
                     android:textColor="#000000"
