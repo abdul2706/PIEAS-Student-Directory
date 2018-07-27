@@ -47,7 +47,6 @@ public class RegistrationActivity extends AppCompatActivity {
     public void actionPerformed(View view) {
         Button clickedButton = (Button) view;
         if (clickedButton.getText().equals("Add")) {
-            Log.i(TAG, "Add Button Clicked");
             setInputData();
             if (allFieldsFilled()) {
                 if (isValidData()) {
@@ -55,16 +54,15 @@ public class RegistrationActivity extends AppCompatActivity {
                     mainActivity.insertStudent(student);
                     mainActivity.getStudentFromDatabase();
                     mainActivity.notifyDataSetChanged();
-                    Toast.makeText(MainActivity.getContext(), "Student Added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Student Added", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
-                    Toast.makeText(MainActivity.getContext(), "Invalid Data Provided", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Invalid Data Provided", Toast.LENGTH_SHORT).show();
                 }
             } else {
-                Toast.makeText(MainActivity.getContext(), "All Input Fields Not Provided", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "All Input Fields Not Provided", Toast.LENGTH_SHORT).show();
             }
         } else if (clickedButton.getText().equals("Cancel")) {
-            Log.i(TAG, "Cancel Button Clicked");
             finish();
         }
     }

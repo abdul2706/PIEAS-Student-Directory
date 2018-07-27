@@ -18,8 +18,8 @@
         android:title="@string/about" />
 
     <item
-        android:id="@+id/addStudent"
-        android:title="Add Student" />
+        android:id="@+id/loadStudent"
+        android:title="Load Student" />
 
     <item
         android:id="@+id/deleteTable"

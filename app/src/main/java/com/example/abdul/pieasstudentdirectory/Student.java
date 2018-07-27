@@ -1,22 +1,24 @@
 package com.example.abdul.pieasstudentdirectory;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Student implements Serializable {
 
     private String studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender;
+    private HashMap<String, String> studentData = new HashMap<>();
 
-//    public Student() {
-//        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A",
-//                "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526",
-//                "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com",
-//                "03310032017", "Male");
-//    }
-//
-//    public Student(Student std) {
-//        this(std.studentName, std.fatherName, std.roomNo, std.hostel, std.address, std.bloodGroup,
-//                std.phoneNo, std.semester, std.batch, std.department, std.email, std.regNo, std.gender);
-//    }
+    public Student() {
+        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A",
+                "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526",
+                "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com",
+                "03310032017", "Male");
+    }
+
+    public Student(Student std) {
+        this(std.studentName, std.fatherName, std.roomNo, std.hostel, std.address, std.bloodGroup,
+                std.phoneNo, std.semester, std.batch, std.department, std.email, std.regNo, std.gender);
+    }
 
     public Student(String studentName, String fatherName, String roomNo, String hostel, String address,
                    String bloodGroup, String phoneNo, String semester, String batch, String department,
