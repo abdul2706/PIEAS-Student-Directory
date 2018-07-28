@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,7 +21,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private ArrayList<Student> studentArrayList;
     private MainActivity mainActivity;
 
-    public CustomAdapter(MainActivity mainActivity, ArrayList<Student> studentsList) {
+    CustomAdapter(MainActivity mainActivity, ArrayList<Student> studentsList) {
         this.mainActivity = mainActivity;
         studentArrayList = studentsList;
     }
@@ -38,10 +37,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.i("onBindViewHolder", "position -> " + position);
-        holder.imageView.setImageResource(R.drawable.android_logo);
-        holder.nameTextView.setText(studentArrayList.get(position).getStudentName());
-        holder.departTextView.setText(studentArrayList.get(position).getDepartment());
-        holder.regNoTextView.setText(studentArrayList.get(position).getRegNo());
+        holder.imageView.setImageResource(R.drawable.pieas_logo);
+        holder.nameTextView.setText(studentArrayList.get(position).getStudentData("studentName"));
+        holder.departTextView.setText(studentArrayList.get(position).getStudentData("department"));
+        holder.regNoTextView.setText(studentArrayList.get(position).getStudentData("regNo"));
 
         final int index = position;
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -82,14 +81,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         return studentArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout relativeLayout;
         ImageView imageView;
         TextView nameTextView;
         TextView departTextView;
         TextView regNoTextView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             relativeLayout = itemView.findViewById(R.id.itemRelativeLayout);
             imageView = itemView.findViewById(R.id.imageView);

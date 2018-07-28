@@ -2,7 +2,6 @@ package com.example.abdul.pieasstudentdirectory;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,14 +13,19 @@ public class RegistrationActivity extends AppCompatActivity {
 
     private static final String TAG = "RegistrationActivity";
     public static final int REGISTRATION_ACTIVITY = 1;
+    private final int[] viewsID = {R.id.studentNameEditText, R.id.fatherNameEditText, R.id.regNoEditText, R.id.batchEditText,
+            R.id.departmentEditText, R.id.semesterEditText, R.id.roomEditText, R.id.hostelEditText, R.id.cgpaEditText, R.id.ageEditText,
+            R.id.genderEditText, R.id.bloodGroupEditText, R.id.contactNoEditView, R.id.emailEditText, R.id.addressEditText};
+
     private MainActivity mainActivity;
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
-    private ArrayList<String> inputData = new ArrayList<>();
+    private String[] inputData = new String[Student.STUDENT_KEYS.length];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        setTitle(R.string.registration_form);
 
         mainActivity = MainActivity.getContext();
         initViews();
@@ -29,19 +33,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
     public void initViews() {
         inputEditTexts.clear();
-        inputEditTexts.add((EditText) findViewById(R.id.studentNameEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.fatherNameEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.roomEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.hostelEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.addressEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.bloodGroupEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.contactNoEditView));
-        inputEditTexts.add((EditText) findViewById(R.id.semesterEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.batchEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.departmentEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.emailEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.regNoEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.genderEditText));
+        for (int aViewsID : viewsID) {
+            inputEditTexts.add((EditText) findViewById(aViewsID));
+        }
     }
 
     public void actionPerformed(View view) {
@@ -50,7 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
             setInputData();
             if (allFieldsFilled()) {
                 if (isValidData()) {
-                    Student student = new Student(inputData.get(0), inputData.get(1), inputData.get(2), inputData.get(3), inputData.get(4), inputData.get(5), inputData.get(6), inputData.get(7), inputData.get(8), inputData.get(9), inputData.get(10), inputData.get(11), inputData.get(12));
+                    Student student = new Student(inputData);
                     mainActivity.insertStudent(student);
                     mainActivity.getStudentFromDatabase();
                     mainActivity.notifyDataSetChanged();
@@ -68,15 +62,13 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void setInputData() {
-        inputData.clear();
-        for (int i = 0; i < inputEditTexts.size(); i++) {
-            inputData.add(inputEditTexts.get(i).getText().toString());
+        for (int i = 0; i < inputData.length; i++) {
+            inputData[i] = inputEditTexts.get(i).getText().toString();
         }
     }
 
     public boolean allFieldsFilled() {
-        for (int i = 0; i < inputData.size(); i++) {
-            String input = inputData.get(i);
+        for (String input : inputData) {
             if (input.equals("")) {
                 return false;
             } else {
@@ -96,12 +88,13 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public boolean isValidData() {
-        return Student.isValidHostel(inputData.get(3).toUpperCase()) &&
-                Student.isValidPhoneNo(inputData.get(6)) &&
-                Student.isValidSemester(inputData.get(7)) &&
-                Student.isValidDepartment(inputData.get(9)) &&
-                Student.isValidRegNo(inputData.get(11)) &&
-                Student.isValidGender(inputData.get(12));
+        return Student.isValidHostel(inputData[7].toUpperCase()) &&
+                Student.isValidPhoneNo(inputData[12]) &&
+                Student.isValidSemester(inputData[5]) &&
+                Student.isValidDepartment(inputData[4]) &&
+                Student.isValidRegNo(inputData[2]) &&
+                Student.isValidGender(inputData[10]) &&
+                Student.isValidCGPA(inputData[8]);
     }
 
 }

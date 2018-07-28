@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.abdul.pieasstudentdirectory.ShowStudentActivity">
+
+    <ImageView
+        android:id="@+id/studentImageView"
+        android:layout_width="118dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="8dp"
+        android:contentDescription="@string/student_image"
+        android:maxHeight="50dp"
+        android:maxWidth="50dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="@+id/bloodGroupTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/studentNameTextView"
+        app:srcCompat="@drawable/android_logo" />
+
+    <TextView
+        android:id="@+id/studentNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/student_name"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/studentImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fatherNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/father_name"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/studentImageView"
+        app:layout_constraintTop_toBottomOf="@+id/studentNameTextView" />
+
+    <TextView
+        android:id="@+id/roomAndHostelTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/room"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/studentImageView"
+        app:layout_constraintTop_toBottomOf="@+id/fatherNameTextView" />
+
+    <TextView
+        android:id="@+id/permanentAddressTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/address"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/studentImageView"
+        app:layout_constraintTop_toBottomOf="@+id/roomAndHostelTextView" />
+
+    <TextView
+        android:id="@+id/bloodGroupTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/blood_group"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/studentImageView"
+        app:layout_constraintTop_toBottomOf="@+id/permanentAddressTextView" />
+
+    <TextView
+        android:id="@+id/contactTextView"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/phone_no"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/contact"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/bloodGroupTextView" />
+
+    <TextView
+        android:id="@+id/semesterTextView"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/semester"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/semester"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/contactTextView" />
+
+    <TextView
+        android:id="@+id/batchTextView"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/batch"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/batch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/semesterTextView" />
+
+    <TextView
+        android:id="@+id/departmentTextView"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/dee_dme_dcis"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/department"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/batchTextView" />
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/email"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/departmentTextView" />
+
+    <TextView
+        android:id="@+id/regNoTextView"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/reg_no"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/registrationNo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/emailTextView" />
+
+    <TextView
+        android:id="@+id/genderTextView"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/male_female"
+        android:textColor="@android:color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gender"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/regNoTextView" />
+
+    <Button
+        android:id="@+id/callBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/holo_green_light"
+        android:onClick="actionPerformed"
+        android:text="@string/call"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/msgBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:color/holo_orange_light"
+        android:onClick="actionPerformed"
+        android:text="@string/message"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <TextView
+        android:id="@+id/contact"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/phone"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/contactTextView"
+        app:layout_constraintTop_toBottomOf="@+id/bloodGroupTextView" />
+
+    <TextView
+        android:id="@+id/semester"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/semester"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/semesterTextView"
+        app:layout_constraintTop_toBottomOf="@+id/contact" />
+
+    <TextView
+        android:id="@+id/batch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/batch"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/batchTextView"
+        app:layout_constraintTop_toBottomOf="@+id/semester" />
+
+    <TextView
+        android:id="@+id/department"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/department"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/departmentTextView"
+        app:layout_constraintTop_toBottomOf="@+id/batch" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/email"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/emailTextView"
+        app:layout_constraintTop_toBottomOf="@+id/gender" />
+
+    <TextView
+        android:id="@+id/registrationNo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/registration"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/regNoTextView"
+        app:layout_constraintTop_toBottomOf="@+id/department" />
+
+    <TextView
+        android:id="@+id/gender"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:padding="4dp"
+        android:text="@string/gender"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/genderTextView"
+        app:layout_constraintTop_toBottomOf="@+id/registrationNo" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:background="@drawable/gradient_filled_rectangle"
+        android:textSize="14sp"
+        android:padding="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</android.support.constraint.ConstraintLayout>

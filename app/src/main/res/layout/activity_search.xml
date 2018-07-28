@@ -20,20 +20,6 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/headerTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:background="@drawable/gradient_filled_rectangle"
-                android:padding="8dp"
-                android:text="@string/search_student"
-                android:textColor="#000000"
-                android:textSize="30sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,14 +31,13 @@
                     android:id="@+id/studentNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/student_name"
-                    android:background="@drawable/gradient_filled_rectangle"
-                    android:textAllCaps="true"
                     android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
                     android:padding="8dp"
+                    android:text="@string/student_name"
+                    android:textAllCaps="true"
                     android:textColor="#000000"
-                    android:textSize="14sp"
-                    />
+                    android:textSize="14sp" />
 
                 <EditText
                     android:id="@+id/studentNameEditText"
@@ -109,196 +94,27 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/roomTextView"
+                    android:id="@+id/regNoTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/gradient_filled_rectangle"
                     android:padding="8dp"
-                    android:text="@string/room"
+                    android:text="@string/registration"
                     android:textAllCaps="true"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/roomEditText"
+                    android:id="@+id/regNoEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/black_boundary"
                     android:ems="10"
-                    android:hint="@string/empty"
-                    android:inputType="number"
-                    android:maxLength="3"
-                    android:padding="8dp"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/editbox_background"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/hostelTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/gradient_filled_rectangle"
-                    android:padding="8dp"
-                    android:text="@string/hostel"
-                    android:textAllCaps="true"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/hostelEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/black_boundary"
-                    android:ems="10"
-                    android:hint="@string/hostels"
-                    android:inputType="text"
-                    android:maxLength="1"
-                    android:padding="8dp"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/editbox_background"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/addressTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/gradient_filled_rectangle"
-                    android:padding="8dp"
-                    android:text="@string/address"
-                    android:textAllCaps="true"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/addressEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/black_boundary"
-                    android:ems="10"
-                    android:hint="@string/empty"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/editbox_background"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/bloodGroupTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/gradient_filled_rectangle"
-                    android:padding="8dp"
-                    android:text="@string/blood_group"
-                    android:textAllCaps="true"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/bloodGroupEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/black_boundary"
-                    android:ems="10"
-                    android:hint="@string/empty"
-                    android:inputType="text"
-                    android:maxLength="2"
-                    android:padding="8dp"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/editbox_background"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/phoneNoTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/gradient_filled_rectangle"
-                    android:padding="8dp"
-                    android:text="@string/phone"
-                    android:textAllCaps="true"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/contactNoEditView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/black_boundary"
-                    android:ems="10"
-                    android:hint="@string/phone_no"
+                    android:hint="@string/reg_no"
                     android:inputType="number"
                     android:maxLength="11"
-                    android:padding="8dp"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:drawable/editbox_background"
-                android:gravity="start"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/semesterTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/gradient_filled_rectangle"
-                    android:padding="8dp"
-                    android:text="@string/semester"
-                    android:textAllCaps="true"
-                    android:textColor="#000000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/semesterEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:background="@drawable/black_boundary"
-                    android:ems="10"
-                    android:hint="@string/_1_8"
-                    android:inputType="number"
-                    android:maxLength="1"
                     android:padding="8dp"
                     android:textColor="#000000"
                     android:textSize="14sp" />
@@ -380,26 +196,27 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/emailTextView"
+                    android:id="@+id/semesterTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/gradient_filled_rectangle"
                     android:padding="8dp"
-                    android:text="@string/email"
+                    android:text="@string/semester"
                     android:textAllCaps="true"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/emailEditText"
+                    android:id="@+id/semesterEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/black_boundary"
                     android:ems="10"
-                    android:hint="@string/username_domain_com"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/_1_8"
+                    android:inputType="number"
+                    android:maxLength="1"
                     android:padding="8dp"
                     android:textColor="#000000"
                     android:textSize="14sp" />
@@ -413,27 +230,129 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/regNoTextView"
+                    android:id="@+id/roomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/gradient_filled_rectangle"
                     android:padding="8dp"
-                    android:text="@string/registration"
+                    android:text="@string/room"
                     android:textAllCaps="true"
                     android:textColor="#000000"
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/regNoEditText"
+                    android:id="@+id/roomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:background="@drawable/black_boundary"
                     android:ems="10"
-                    android:hint="@string/reg_no"
+                    android:hint="@string/empty"
                     android:inputType="number"
-                    android:maxLength="11"
+                    android:maxLength="3"
+                    android:padding="8dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/hostelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
+                    android:padding="8dp"
+                    android:text="@string/hostel"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/hostelEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/black_boundary"
+                    android:ems="10"
+                    android:hint="@string/hostels"
+                    android:inputType="text"
+                    android:maxLength="1"
+                    android:padding="8dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/cgpaTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
+                    android:padding="8dp"
+                    android:text="@string/cgpa"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/cgpaEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/black_boundary"
+                    android:ems="10"
+                    android:hint="@string/cgpa_pattern"
+                    android:inputType="numberDecimal"
+                    android:maxLength="5"
+                    android:padding="8dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
+                    android:padding="8dp"
+                    android:text="@string/age"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/ageEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/black_boundary"
+                    android:ems="10"
+                    android:hint="@string/empty"
+                    android:inputType="number"
+                    android:maxLength="2"
                     android:padding="8dp"
                     android:textColor="#000000"
                     android:textSize="14sp" />
@@ -468,6 +387,140 @@
                     android:hint="@string/male_female"
                     android:inputType="textPersonName"
                     android:maxLength="1"
+                    android:padding="8dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/bloodGroupTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
+                    android:padding="8dp"
+                    android:text="@string/blood_group"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/bloodGroupEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/black_boundary"
+                    android:ems="10"
+                    android:hint="@string/empty"
+                    android:inputType="text"
+                    android:maxLength="2"
+                    android:padding="8dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/phoneNoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
+                    android:padding="8dp"
+                    android:text="@string/phone"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/contactNoEditView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/black_boundary"
+                    android:ems="10"
+                    android:hint="@string/phone_no"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:padding="8dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/emailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
+                    android:padding="8dp"
+                    android:text="@string/email"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/emailEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/black_boundary"
+                    android:ems="10"
+                    android:hint="@string/username_domain_com"
+                    android:inputType="textEmailAddress"
+                    android:padding="8dp"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/editbox_background"
+                android:gravity="start"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/addressTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/gradient_filled_rectangle"
+                    android:padding="8dp"
+                    android:text="@string/address"
+                    android:textAllCaps="true"
+                    android:textColor="#000000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/addressEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/black_boundary"
+                    android:ems="10"
+                    android:hint="@string/empty"
+                    android:inputType="text"
                     android:padding="8dp"
                     android:textColor="#000000"
                     android:textSize="14sp" />

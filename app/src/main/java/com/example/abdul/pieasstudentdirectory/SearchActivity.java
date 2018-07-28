@@ -4,18 +4,22 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class SearchActivity extends AppCompatActivity {
 
     private static final String TAG = "SearchActivity";
     public static final int SEARCH_ACTIVITY = 3;
+    private final int[] viewsID = {R.id.studentNameEditText, R.id.fatherNameEditText, R.id.regNoEditText, R.id.batchEditText,
+            R.id.departmentEditText, R.id.semesterEditText, R.id.roomEditText, R.id.hostelEditText, R.id.cgpaEditText, R.id.ageEditText,
+            R.id.genderEditText, R.id.bloodGroupEditText, R.id.contactNoEditView, R.id.emailEditText, R.id.addressEditText};
+
     private MainActivity mainActivity;
     private ArrayList<EditText> inputEditTexts = new ArrayList<>();
     private ArrayList<String> searchTags = new ArrayList<>();
@@ -26,6 +30,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        setTitle(R.string.search_student);
 
         mainActivity = MainActivity.getContext();
         studentList = mainActivity.getStudentArrayList();
@@ -34,34 +39,11 @@ public class SearchActivity extends AppCompatActivity {
 
     public void initViews() {
         inputEditTexts.clear();
-        inputEditTexts.add((EditText) findViewById(R.id.studentNameEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.fatherNameEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.roomEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.hostelEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.addressEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.bloodGroupEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.contactNoEditView));
-        inputEditTexts.add((EditText) findViewById(R.id.semesterEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.batchEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.departmentEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.emailEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.regNoEditText));
-        inputEditTexts.add((EditText) findViewById(R.id.genderEditText));
+        for (int aViewsID : viewsID) {
+            inputEditTexts.add((EditText) findViewById(aViewsID));
+        }
 
-//        studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender
-        databaseColumns.add("studentName");
-        databaseColumns.add("fatherName");
-        databaseColumns.add("roomNo");
-        databaseColumns.add("hostel");
-        databaseColumns.add("address");
-        databaseColumns.add("bloodGroup");
-        databaseColumns.add("phoneNo");
-        databaseColumns.add("semester");
-        databaseColumns.add("batch");
-        databaseColumns.add("department");
-        databaseColumns.add("email");
-        databaseColumns.add("regNo");
-        databaseColumns.add("gender");
+        Collections.addAll(databaseColumns, Student.STUDENT_KEYS);
     }
 
     public void actionPerformed(View view) {
@@ -92,23 +74,21 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void searchSQLiteDatabase(String query) {
+        String[] values = new String[Student.STUDENT_KEYS.length];
         Cursor cursor = mainActivity.selectStudent(query);
-        StringBuilder studentAsString;
         cursor.moveToFirst();
         if (cursor.getCount() != 0) {
             studentList.clear();
             Toast.makeText(this, cursor.getCount() + " Match Found", Toast.LENGTH_SHORT).show();
             do {
-                studentAsString = new StringBuilder();
                 for (int i = 1; i < cursor.getColumnNames().length; i++) {
-                    studentAsString.append(cursor.getString(i)).append(";");
+                    values[i - 1] = cursor.getString(i);
                 }
-                studentList.add(Student.parseStringToStudent(studentAsString.toString()));
+                studentList.add(new Student(values));
             } while (cursor.moveToNext());
             mainActivity.notifyDataSetChanged();
             finish();
         } else {
-            Log.i(TAG, "searchSQLiteDatabase : " + "No Match Found");
             Toast.makeText(this, "No Match Found", Toast.LENGTH_SHORT).show();
         }
         cursor.close();

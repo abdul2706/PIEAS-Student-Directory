@@ -34,4 +34,8 @@
     <string name="message">Message</string>
     <string name="hostels">A, B, E, C, G, H, J</string>
     <string name="batchNo">##-##</string>
+    <string name="cgpa">CGPA</string>
+    <string name="cgpa_pattern">##.##</string>
+    <string name="age">Age</string>
+    <string name="edit">Edit</string>
 </resources>

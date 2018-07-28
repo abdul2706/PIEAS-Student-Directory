@@ -5,232 +5,102 @@ import java.util.HashMap;
 
 public class Student implements Serializable {
 
-    private String studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender;
     private HashMap<String, String> studentData = new HashMap<>();
+    public static final String[] STUDENT_KEYS = {"studentName", "fatherName", "regNo", "batch", "department", "semester",
+            "roomNo", "hostel", "cgpa", "age", "gender", "bloodGroup", "phoneNo", "email", "address"};
 
-    public Student() {
-        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "204", "A",
-                "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526",
-                "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com",
-                "03310032017", "Male");
+//    public Student() {
+//        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "03310032017", "17-21", "dcis",
+//                "3", "204", "a", "3.91", "19", "m", "A+", "03311205526",
+//                "bscs1725@pieas.edu.pk", "gujranwala");
+//    }
+
+    Student(String[] values){
+        this(values[0], values[1], values[2], values[3], values[4], values[5], values[6], values[7],
+                values[8], values[9], values[10], values[11], values[12], values[13], values[14]);
     }
 
-    public Student(Student std) {
-        this(std.studentName, std.fatherName, std.roomNo, std.hostel, std.address, std.bloodGroup,
-                std.phoneNo, std.semester, std.batch, std.department, std.email, std.regNo, std.gender);
+    private Student(String studentName, String fatherName, String regNo, String batch, String department, String semester, String roomNo,
+                    String hostel, String cgpa, String age, String gender, String bloodGroup, String phoneNo, String email, String address) {
+        setStudentData(STUDENT_KEYS[0], studentName);
+        setStudentData(STUDENT_KEYS[1], fatherName);
+        setStudentData(STUDENT_KEYS[2], regNo);
+        setStudentData(STUDENT_KEYS[3], batch);
+        setStudentData(STUDENT_KEYS[4], department);
+        setStudentData(STUDENT_KEYS[5], semester);
+        setStudentData(STUDENT_KEYS[6], roomNo);
+        setStudentData(STUDENT_KEYS[7], hostel);
+        setStudentData(STUDENT_KEYS[8], cgpa);
+        setStudentData(STUDENT_KEYS[9], age);
+        setStudentData(STUDENT_KEYS[10], gender);
+        setStudentData(STUDENT_KEYS[11], bloodGroup);
+        setStudentData(STUDENT_KEYS[12], phoneNo);
+        setStudentData(STUDENT_KEYS[13], email);
+        setStudentData(STUDENT_KEYS[14], address);
     }
 
-    public Student(String studentName, String fatherName, String roomNo, String hostel, String address,
-                   String bloodGroup, String phoneNo, String semester, String batch, String department,
-                   String email, String regNo, String gender) {
-        setStudentName(studentName);
-        setFatherName(fatherName);
-        setRoomNo(roomNo);
-        setHostel(hostel);
-        setAddress(address);
-        setBloodGroup(bloodGroup);
-        setPhoneNo(phoneNo);
-        setSemester(semester);
-        setBatch(batch);
-        setDepartment(department);
-        setEmail(email);
-        setRegNo(regNo);
-        setGender(gender);
+    public String getStudentData(String key) {
+        return studentData.get(key);
     }
 
-    public String getStudentName() {
-        return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName.toUpperCase();
-    }
-
-    public String getFatherName() {
-        return fatherName;
-    }
-
-    public void setFatherName(String fatherName) {
-        this.fatherName = fatherName.toUpperCase();
-    }
-
-    public String getRoomNo() {
-        return roomNo;
-    }
-
-    public void setRoomNo(String roomNo) {
-        this.roomNo = roomNo;
-    }
-
-    public String getHostel() {
-        return hostel;
-    }
-
-    public void setHostel(String hostel) {
-        this.hostel = getValidHostel(hostel.toUpperCase());
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address.toUpperCase();
-    }
-
-    public String getBloodGroup() {
-        return bloodGroup;
-    }
-
-    public void setBloodGroup(String bloodGroup) {
-        this.bloodGroup = bloodGroup.toUpperCase();
-    }
-
-    public String getPhoneNo() {
-        return phoneNo;
-    }
-
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = getValidPhoneNo(phoneNo);
-    }
-
-    public String getSemester() {
-        return semester;
-    }
-
-    public void setSemester(String semester) {
-        this.semester = getValidSemester(semester);
-    }
-
-    public String getBatch() {
-        return batch;
-    }
-
-    public void setBatch(String batch) {
-        this.batch = batch;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = getValidDepartment(department);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getRegNo() {
-        return regNo;
-    }
-
-    public void setRegNo(String regNo) {
-        this.regNo = getValidRegNo(regNo);
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = getValidGender(gender.toLowerCase());
+    private void setStudentData(String key, String value) {
+        switch (key){
+            case "regNo":
+                studentData.put(key, getValidRegNo(value));
+                break;
+            case "department":
+                studentData.put(key, getValidDepartment(value));
+                break;
+            case "semester":
+                studentData.put(key, getValidSemester(value));
+                break;
+            case "hostel":
+                studentData.put(key, getValidHostel(value));
+                break;
+            case "cgpa":
+                studentData.put(key, getValidCGPA(value));
+                break;
+            case "gender":
+                studentData.put(key, getValidGender(value));
+                break;
+            case "phoneNo":
+                studentData.put(key, getValidPhoneNo(value));
+                break;
+            default:
+                studentData.put(key, value);
+        }
     }
 
     @Override
     public String toString() {
-        //studentName, fatherName, roomNo, hostel, address, bloodGroup,
-        //phoneNo, semester, batch, department, email, regNo, gender;
-        return "studentName -> " + studentName + "\n" +
-                "fatherName -> " + fatherName + "\n" +
-                "roomNo -> " + roomNo + "\n" +
-                "hostel -> " + hostel + "\n" +
-                "address -> " + address + "\n" +
-                "bloodGroup -> " + bloodGroup + "\n" +
-                "phoneNo -> " + phoneNo + "\n" +
-                "semester -> " + semester + "\n" +
-                "batch -> " + batch + "\n" +
-                "department -> " + department + "\n" +
-                "email -> " + email + "\n" +
-                "regNo -> " + regNo + "\n" +
-                "gender -> " + gender;
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String key : STUDENT_KEYS) {
+            stringBuilder.append(key).append(" -> ").append(studentData.get(key)).append("\n");
+        }
+        return stringBuilder.toString();
     }
 
     @Override
     public boolean equals(Object std) {
-        //studentName, fatherName, roomNo, hostel, address, bloodGroup,
-        //phoneNo, semester, batch, department, email, regNo, gender;
-        if(std instanceof Student) {
+        if (std instanceof Student) {
             Student student = (Student) std;
-            return this.studentName.equals(student.getStudentName()) &&
-                    this.fatherName.equals(student.getFatherName()) &&
-                    this.roomNo.equals(student.getRoomNo()) &&
-                    this.hostel.equals(student.getHostel()) &&
-                    this.address.equals(student.getAddress()) &&
-                    this.bloodGroup.equals(student.getBloodGroup()) &&
-                    this.phoneNo.equals(student.getPhoneNo()) &&
-                    this.semester.equals(student.getSemester()) &&
-                    this.batch.equals(student.getBatch()) &&
-                    this.department.equals(student.getDepartment()) &&
-                    this.email.equals(student.getEmail()) &&
-                    this.regNo.equals(student.getRegNo()) &&
-                    this.gender.equals(student.getGender());
+            return this.studentData.get("regNo").equalsIgnoreCase(student.studentData.get("regNo"));
         }
         return false;
     }
 
     // Static Methods
     public static String parseStudentToString(Student std) {
-        return "'" + std.studentName + "', '" + std.fatherName + "', '" + std.roomNo + "', '" + std.hostel + "', '" +
-                std.address + "', '" + std.bloodGroup + "', '" + std.phoneNo + "', '" + std.semester + "', '" + std.batch + "', '" +
-                std.department + "', '" + std.email + "', '" + std.regNo + "', '" + std.gender + "'";
-    }
-
-    public static Student parseStringToStudent(String line) {
-        String studentName = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String fatherName = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String roomNo = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String hostel = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String address = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String bloodGroup = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String phoneNo = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String semester = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String batch = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String department = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String email = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String regNo = line.substring(0, line.indexOf(";"));
-        line = line.substring(line.indexOf(";") + 1);
-
-        String gender = line.substring(0, line.indexOf(";"));
-
-        return new Student(studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("'");
+        for (String key : STUDENT_KEYS) {
+            if(!key.equals("address")) {
+                stringBuilder.append(std.studentData.get(key)).append("', '");
+            } else {
+                stringBuilder.append(std.studentData.get(key)).append("'");
+            }
+        }
+        return stringBuilder.toString();
     }
 
     private static String getValidHostel(String hostel) {
@@ -262,7 +132,7 @@ public class Student implements Serializable {
         if (department.contains("ee")) {
             return "DEE";
         } else if (department.contains("me")) {
-            return  "DME";
+            return "DME";
         } else if (department.contains("cis") || department.contains("cs")) {
             return "DCIS";
         } else {
@@ -294,6 +164,14 @@ public class Student implements Serializable {
 
     public static boolean isValidGender(String gender) {
         return gender.toLowerCase().charAt(0) == 'm' || gender.toLowerCase().charAt(0) == 'f';
+    }
+
+    private static String getValidCGPA(String cgpa) {
+        return isValidCGPA(cgpa) ? cgpa : "invalid";
+    }
+
+    public static boolean isValidCGPA(String cgpa) {
+        return cgpa.compareTo("0.00") >= 0 && cgpa.compareTo("4.00") <= 0;
     }
 
 }

@@ -31,15 +31,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        setTitle(R.string.student_list);
         context = this;
+
         try {
-            sqLiteDatabase = openOrCreateDatabase("StudentData", Context.MODE_PRIVATE, null);
-            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS studentTable (id INTEGER PRIMARY KEY, studentName VARCHAR, fatherName VARCHAR, roomNo VARCHAR, hostel VARCHAR, address VARCHAR, bloodGroup VARCHAR, phoneNo VARCHAR, semester VARCHAR, batch VARCHAR, department VARCHAR, email VARCHAR, regNo VARCHAR, gender VARCHAR)");
+            sqLiteDatabase = this.openOrCreateDatabase("StudentData", Context.MODE_PRIVATE, null);
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS studentTable (id INTEGER PRIMARY KEY, studentName VARCHAR, fatherName VARCHAR, regNo VARCHAR, batch VARCHAR, department VARCHAR, semester VARCHAR, roomNo VARCHAR, hostel VARCHAR, cgpa VARCHAR, age VARCHAR, gender VARCHAR, bloodGroup VARCHAR, phoneNo VARCHAR, email VARCHAR, address VARCHAR)");
             loadStudentsToDatabase();
             getStudentFromDatabase();
         } catch (Exception e) {
-            Log.i(TAG, e.getMessage());
+            Log.e(TAG, e.getMessage());
             e.printStackTrace();
         }
 
@@ -140,11 +141,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void insertStudent(Student std) {
-        sqLiteDatabase.execSQL("INSERT INTO studentTable (studentName, fatherName, roomNo, hostel, address, bloodGroup, phoneNo, semester, batch, department, email, regNo, gender) VALUES (" + Student.parseStudentToString(std) + ")");
+        sqLiteDatabase.execSQL("INSERT INTO studentTable (studentName, fatherName, regNo, batch, department, semester, roomNo, hostel, cgpa, age, gender, bloodGroup, phoneNo, email, address) VALUES (" + Student.parseStudentToString(std) + ")");
     }
 
     public void deleteStudent(int index) {
-        sqLiteDatabase.execSQL("DELETE FROM studentTable WHERE regNo = '" + studentArrayList.get(index).getRegNo() + "'");
+        sqLiteDatabase.execSQL("DELETE FROM studentTable WHERE regNo = '" + studentArrayList.get(index).getStudentData("regNo") + "'");
     }
 
     public void updateStudent(String value) {
@@ -152,28 +153,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public Cursor selectStudent(String query) {
-//        return sqLiteDatabase.rawQuery("SELECT * FROM studentTable WHERE " + "studentName = 'Abdul Rehman Khan' AND fatherName = 'Tanveer Ahmed Khan' AND roomNo = '207' AND hostel = 'E' AND address = 'khaqan St#1, Arif Colony, Gill Road, GRW' AND bloodGroup = 'A+' AND phoneNo = '03311205526' AND semester = '3' AND batch = '17-21' AND department = 'DCIS' AND email = 'abdulrehmankhan27061998@gmail.com' AND regNo = '03310032017' AND gender = 'M'", null);
         Log.i(TAG, "selectStudent : " + "SELECT * FROM studentTable WHERE " + query);
         return sqLiteDatabase.rawQuery("SELECT * FROM studentTable WHERE " + query, null);
-//        return sqLiteDatabase.rawQuery("SELECT * FROM studentTable WHERE studentName LIKE UPPER('%Abdul%')", null);
     }
 
     public void getStudentFromDatabase() {
-        StringBuilder studentAsString;
+        Log.i(TAG, "getStudentFromDatabase: Start");
+        String[] values = new String[Student.STUDENT_KEYS.length];
         studentArrayList.clear();
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM studentTable", null);
         cursor.moveToFirst();
         Log.i(TAG, "getCount : " + cursor.getCount());
         if (cursor.getCount() != 0) {
             do {
-                studentAsString = new StringBuilder();
                 for (int i = 1; i < cursor.getColumnNames().length; i++) {
-                    studentAsString.append(cursor.getString(i)).append(";");
+                    values[i - 1] = cursor.getString(i);
                 }
-                addStudent(Student.parseStringToStudent(studentAsString.toString()));
+                addStudent(new Student(values));
             } while (cursor.moveToNext());
         }
         cursor.close();
+        Log.i(TAG, "getStudentFromDatabase: End");
     }
 
     public void notifyDataSetChanged() {
@@ -186,39 +186,47 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadStudentsToDatabase(){
-//        insertStudent(new Student("Abdul Rehman Khan", "Tanveer Ahmed Khan", "207", "E", "khaqan St#1, Arif Colony, Gill Road, GRW", "A+", "03311205526", "3", "17-21", "dcis", "abdulrehmankhan27061998@gmail.com", "03310032017", "M"));
-        insertStudent(new Student("AAMIR ABBAS",                "",                     "207",  "E", "parachinar",      "",     "03349333694",  "3", "17-21", "dcis", "bscs1733@pieas.edu.pk", "03310012017", "M"));
-        insertStudent(new Student("ABDUL RAFAY",                "",                     "107",  "B", "faisalabad",      "",     "03123804728",  "3", "17-21", "dcis", "bscs1723@pieas.edu.pk", "03310022017", "M"));
-        insertStudent(new Student("Abdul Rehman Khan",          "Tanveer Ahmed Khan",   "207",  "E", "gujranwala",      "A+",   "03311205526",  "3", "17-21", "dcis", "bscs1725@pieas.edu.pk", "03310032017", "M"));
-        insertStudent(new Student("ABDULLAH AHMAD",             "",                     "210",  "E", "lahore",          "",     "03318465317",  "3", "17-21", "dcis", "bscs1704@pieas.edu.pk", "03310042017", "M"));
-        insertStudent(new Student("AHMAD ASHIQ",                "",                     "202",  "E", "gujranwala",      "",     "03370735034",  "3", "17-21", "dcis", "bscs1727@pieas.edu.pk", "03310052017", "M"));
-        insertStudent(new Student("AHMED RAMEEZ",               "",                     "214",  "E", "islamabad",       "",     "03318844841",  "3", "17-21", "dcis", "bscs1707@pieas.edu.pk", "03310062017", "M"));
-        insertStudent(new Student("AHMER HASSAN",               "",                     "117",  "B", "haripur",         "",     "03361514671",  "3", "17-21", "dcis", "bscs1711@pieas.edu.pk", "03310072017", "M"));
-        insertStudent(new Student("ALEENA AJAZ",                "",                     "-",    "G", "islamabad",       "",     "",             "3", "17-21", "dcis", "bscs1728@pieas.edu.pk", "03310082017", "F"));
-        insertStudent(new Student("AMEER HAMZA",                "",                     "214",  "E", "lahore",          "",     "03367278119",  "3", "17-21", "dcis", "bscs1713@pieas.edu.pk", "03310092017", "M"));
-        insertStudent(new Student("AYESHA SALAR",               "",                     "-",    "G", "islamabad",       "",     "",             "3", "17-21", "dcis", "bscs1729@pieas.edu.pk", "03310102017", "F"));
-        insertStudent(new Student("BIBI AYISHA",                "",                     "-",    "G", "islamabad",       "",     "",             "3", "17-21", "dcis", "bscs1701@pieas.edu.pk", "03310112017", "F"));
-        insertStudent(new Student("HAMZA IRSHAD",               "",                     "202",  "E", "lahore",          "",     "03067098760",  "3", "17-21", "dcis", "bscs1726@pieas.edu.pk", "03310122017", "M"));
-        insertStudent(new Student("HASSAN ASKARY",              "",                     "-",    "E", "islamabad",       "",     "03342013999",  "3", "17-21", "dcis", "bscs1717@pieas.edu.pk", "03310132017", "M"));
-        insertStudent(new Student("HASSAN RAZA KHAN",           "",                     "210",  "E", "lahore",          "",     "",             "3", "17-21", "dcis", "bscs1777@pieas.edu.pk", "03310142017", "M"));
-        insertStudent(new Student("HASSAN SATTAR",              "",                     "207",  "E", "shinkiari",       "",     "03439555320",  "3", "17-21", "dcis", "bscs1724@pieas.edu.pk", "03310152017", "M"));
-        insertStudent(new Student("KHAYYAM AKHTAR",             "",                     "-",    "E", "islamabad",       "",     "03128666939",  "3", "17-21", "dcis", "bscs1709@pieas.edu.pk", "03310162017", "M"));
-        insertStudent(new Student("MUHAMMAD AAQIB",             "",                     "107",  "B", "sargodha",        "",     "03377255904",  "3", "17-21", "dcis", "bscs1734@pieas.edu.pk", "03310172017", "M"));
-        insertStudent(new Student("MUHAMMAD FARRUKH IRFAN",     "",                     "117",  "B", "faisalabad",      "",     "03041258003",  "3", "17-21", "dcis", "bscs1706@pieas.edu.pk", "03310182017", "M"));
-        insertStudent(new Student("MUHAMMAD HASSAN KHAN",       "",                     "115",  "B", "lahore",          "",     "03334706761",  "3", "17-21", "dcis", "bscs1722@pieas.edu.pk", "03310192017", "M"));
-        insertStudent(new Student("MUHAMMAD INAAM ELAHI",       "",                     "313",  "E", "faisalabad",      "",     "03340754787",  "3", "17-21", "dcis", "bscs1716@pieas.edu.pk", "03310202017", "M"));
-        insertStudent(new Student("MUHAMMAD OBAIDULLAH",        "",                     "207",  "E", "daska",           "",     "03349841289",  "3", "17-21", "dcis", "bscs1708@pieas.edu.pk", "03310212017", "M"));
-        insertStudent(new Student("MUHAMMAD UMAR",              "",                     "313",  "E", "taxila",          "",     "",             "3", "17-21", "dcis", "bscs1739@pieas.edu.pk", "03310222017", "M"));
-        insertStudent(new Student("MUHAMMAD UMAR FAROOQ",       "",                     "201",  "E", "faisalabad",      "",     "03074113833",  "3", "17-21", "dcis", "bscs1715@pieas.edu.pk", "03310232017", "M"));
-        insertStudent(new Student("MUHAMMAD ZEESHAN TAHIR",     "",                     "319",  "E", "DJ khan",         "",     "03103303732",  "3", "17-21", "dcis", "bscs1720@pieas.edu.pk", "03310242017", "M"));
-        insertStudent(new Student("MUHAMMAD ZUNAIR",            "",                     "115",  "B", "faisalabad",      "",     "03006040195",  "3", "17-21", "dcis", "bscs1721@pieas.edu.pk", "03310252017", "M"));
-        insertStudent(new Student("MUSFIRAH EHSAN",             "",                     "-",    "G", "rawalpindi",      "",     "",             "3", "17-21", "dcis", "bscs1710@pieas.edu.pk", "03310262017", "F"));
-        insertStudent(new Student("NIMRA RIAZ",                 "",                     "-",    "G", "rawalpindi",      "",     "",             "3", "17-21", "dcis", "bscs1714@pieas.edu.pk", "03310272017", "F"));
-        insertStudent(new Student("SALMA RASHID",               "",                     "-",    "G", "islamabad",       "",     "",             "3", "17-21", "dcis", "bscs1718@pieas.edu.pk", "03310282017", "F"));
-        insertStudent(new Student("TANVEER HUSSAIN",            "",                     "119",  "B", "rahim yar khan",  "",     "03063291827",  "3", "17-21", "dcis", "bscs1723@pieas.edu.pk", "03310292017", "M"));
-        insertStudent(new Student("UMAR SHAHZAD",               "",                     "209",  "E", "rahim yar khan",  "",     "03087282420",  "3", "17-21", "dcis", "bscs1705@pieas.edu.pk", "03310302017", "M"));
-        insertStudent(new Student("WALEED AKHTAR",              "",                     "315",  "E", "lahore",          "",     "03355786231",  "3", "17-21", "dcis", "bscs1731@pieas.edu.pk", "03310312017", "M"));
-        insertStudent(new Student("ZOHA ASSAD",                 "",                     "-",    "G", "islamabad",       "",     "",             "3", "17-21", "dcis", "bscs1712@pieas.edu.pk", "03310322017", "F"));
+        Log.i(TAG, "loadStudentsToDatabase: Start");
+        String[][] bscisStudents = {
+//                {"studentName", "fatherName", "regNo", "batch", "department", "semester", "roomNo", "hostel", "cgpa", "age", "gender", "bloodGroup", "phoneNo", "email", "address"},
+                {"AAMIR ABBAS",             "",                     "03310012017", "17-21", "dcis", "3", "207", "E", "",        "19", "m", "",      "03349333694", "bscs1733@pieas.edu.pk", "parachinar"},
+                {"ABDUL RAFAY",             "",                     "03310022017", "17-21", "dcis", "3", "107", "B", "",        "19", "m", "",      "03123804728", "bscs1723@pieas.edu.pk", "faisalabad"},      //"bscs1723@pieas.edu.pk"
+                {"Abdul Rehman Khan",       "Tanveer Ahmed Khan",   "03310032017", "17-21", "dcis", "3", "207", "E", "3.91",    "19", "m", "A+",    "03311205526", "bscs1725@pieas.edu.pk", "gujranwala"},      //"bscs1725@pieas.edu.pk"
+                {"ABDULLAH AHMAD",          "",                     "03310042017", "17-21", "dcis", "3", "210", "E", "",        "19", "m", "",      "03318465317", "bscs1704@pieas.edu.pk", "lahore"},          //"bscs1704@pieas.edu.pk"
+                {"AHMAD ASHIQ",             "",                     "03310052017", "17-21", "dcis", "3", "202", "E", "",        "19", "m", "",      "03370735034", "bscs1727@pieas.edu.pk", "gujranwala"},      //"bscs1727@pieas.edu.pk"
+                {"AHMED RAMEEZ",            "",                     "03310062017", "17-21", "dcis", "3", "214", "E", "",        "19", "m", "",      "03318844841", "bscs1707@pieas.edu.pk", "islamabad"},       //"bscs1707@pieas.edu.pk"
+                {"AHMER HASSAN",            "",                     "03310072017", "17-21", "dcis", "3", "117", "B", "",        "19", "m", "",      "03361514671", "bscs1711@pieas.edu.pk", "haripur"},         //"bscs1711@pieas.edu.pk"
+                {"ALEENA AJAZ",             "",                     "03310082017", "17-21", "dcis", "3", "000", "G", "",        "19", "m", "",      "",            "bscs1728@pieas.edu.pk", "islamabad"},       //"bscs1728@pieas.edu.pk"
+                {"AMEER HAMZA",             "",                     "03310092017", "17-21", "dcis", "3", "214", "E", "",        "19", "m", "",      "03367278119", "bscs1713@pieas.edu.pk", "lahore"},          //"bscs1713@pieas.edu.pk"
+                {"AYESHA SALAR",            "",                     "03310102017", "17-21", "dcis", "3", "000", "G", "",        "19", "m", "",      "",            "bscs1729@pieas.edu.pk", "islamabad"},       //"bscs1729@pieas.edu.pk"
+                {"BIBI AYISHA",             "",                     "03310112017", "17-21", "dcis", "3", "000", "G", "",        "19", "m", "",      "",            "bscs1701@pieas.edu.pk", "islamabad"},       //"bscs1701@pieas.edu.pk"
+                {"HAMZA IRSHAD",            "",                     "03310122017", "17-21", "dcis", "3", "202", "E", "",        "19", "m", "",      "03067098760", "bscs1726@pieas.edu.pk", "lahore"},          //"bscs1726@pieas.edu.pk"
+                {"HASSAN ASKARY",           "",                     "03310132017", "17-21", "dcis", "3", "000", "E", "",        "19", "m", "",      "03342013999", "bscs1717@pieas.edu.pk", "islamabad"},       //"bscs1717@pieas.edu.pk"
+                {"HASSAN RAZA KHAN",        "",                     "03310142017", "17-21", "dcis", "3", "210", "E", "",        "19", "m", "",      "",            "bscs1777@pieas.edu.pk", "lahore"},          //"bscs1777@pieas.edu.pk"
+                {"HASSAN SATTAR",           "",                     "03310152017", "17-21", "dcis", "3", "207", "E", "",        "19", "m", "",      "03439555320", "bscs1724@pieas.edu.pk", "shinkiari"},       //"bscs1724@pieas.edu.pk"
+                {"KHAYYAM AKHTAR",          "",                     "03310162017", "17-21", "dcis", "3", "000", "E", "",        "19", "m", "",      "03128666939", "bscs1709@pieas.edu.pk", "islamabad"},       //"bscs1709@pieas.edu.pk"
+                {"MUHAMMAD AAQIB",          "",                     "03310172017", "17-21", "dcis", "3", "107", "B", "",        "19", "m", "",      "03377255904", "bscs1734@pieas.edu.pk", "sargodha"},        //"bscs1734@pieas.edu.pk"
+                {"MUHAMMAD FARRUKH IRFAN",  "",                     "03310182017", "17-21", "dcis", "3", "117", "B", "",        "19", "m", "",      "03041258003", "bscs1706@pieas.edu.pk", "faisalabad"},      //"bscs1706@pieas.edu.pk"
+                {"MUHAMMAD HASSAN KHAN",    "",                     "03310192017", "17-21", "dcis", "3", "115", "B", "",        "19", "m", "",      "03334706761", "bscs1722@pieas.edu.pk", "lahore"},          //"bscs1722@pieas.edu.pk"
+                {"MUHAMMAD INAAM ELAHI",    "",                     "03310202017", "17-21", "dcis", "3", "313", "E", "",        "19", "m", "",      "03340754787", "bscs1716@pieas.edu.pk", "faisalabad"},      //"bscs1716@pieas.edu.pk"
+                {"MUHAMMAD OBAIDULLAH",     "",                     "03310212017", "17-21", "dcis", "3", "207", "E", "",        "19", "m", "",      "03349841289", "bscs1708@pieas.edu.pk", "daska"},           //"bscs1708@pieas.edu.pk"
+                {"MUHAMMAD UMAR",           "",                     "03310222017", "17-21", "dcis", "3", "313", "E", "",        "19", "m", "",      "",            "bscs1739@pieas.edu.pk", "taxila"},          //"bscs1739@pieas.edu.pk"
+                {"MUHAMMAD UMAR FAROOQ",    "",                     "03310232017", "17-21", "dcis", "3", "201", "E", "",        "19", "m", "",      "03074113833", "bscs1715@pieas.edu.pk", "faisalabad"},      //"bscs1715@pieas.edu.pk"
+                {"MUHAMMAD ZEESHAN TAHIR",  "",                     "03310242017", "17-21", "dcis", "3", "319", "E", "",        "19", "m", "",      "03103303732", "bscs1720@pieas.edu.pk", "DJ khan"},         //"bscs1720@pieas.edu.pk"
+                {"MUHAMMAD ZUNAIR",         "",                     "03310252017", "17-21", "dcis", "3", "115", "B", "",        "19", "m", "",      "03006040195", "bscs1721@pieas.edu.pk", "faisalabad"},      //"bscs1721@pieas.edu.pk"
+                {"MUSFIRAH EHSAN",          "",                     "03310262017", "17-21", "dcis", "3", "000", "G", "",        "19", "m", "",      "",            "bscs1710@pieas.edu.pk", "rawalpindi"},      //"bscs1710@pieas.edu.pk"
+                {"NIMRA RIAZ",              "",                     "03310272017", "17-21", "dcis", "3", "000", "G", "",        "19", "m", "",      "",            "bscs1714@pieas.edu.pk", "rawalpindi"},      //"bscs1714@pieas.edu.pk"
+                {"SALMA RASHID",            "",                     "03310282017", "17-21", "dcis", "3", "000", "G", "",        "19", "m", "",      "",            "bscs1718@pieas.edu.pk", "islamabad"},       //"bscs1718@pieas.edu.pk"
+                {"TANVEER HUSSAIN",         "",                     "03310292017", "17-21", "dcis", "3", "119", "B", "",        "19", "m", "",      "03063291827", "bscs1723@pieas.edu.pk", "rahim yar khan"},  //"bscs1723@pieas.edu.pk"
+                {"UMAR SHAHZAD",            "",                     "03310302017", "17-21", "dcis", "3", "209", "E", "",        "19", "m", "",      "03087282420", "bscs1705@pieas.edu.pk", "rahim yar khan"},  //"bscs1705@pieas.edu.pk"
+                {"WALEED AKHTAR",           "",                     "03310312017", "17-21", "dcis", "3", "315", "E", "",        "19", "m", "",      "03355786231", "bscs1731@pieas.edu.pk", "lahore"},          //"bscs1731@pieas.edu.pk"
+                {"ZOHA ASSAD",              "",                     "03310322017", "17-21", "dcis", "3", "000", "G", "",        "19", "m", "",      "",            "bscs1712@pieas.edu.pk", "islamabad"},       //"bscs1712@pieas.edu.pk"
+        };
+
+        for(String[] std : bscisStudents) {
+            insertStudent(new Student(std));
+        }
+        Log.i(TAG, "loadStudentsToDatabase: End");
     }
 
 }
