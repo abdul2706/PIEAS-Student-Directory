@@ -17,8 +17,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/android_logo" />
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/pieas_logo" />
 
     <TextView
         android:id="@+id/nameTextView"
