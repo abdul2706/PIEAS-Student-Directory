@@ -42,7 +42,6 @@ public class SearchActivity extends AppCompatActivity {
         for (int aViewsID : viewsID) {
             inputEditTexts.add((EditText) findViewById(aViewsID));
         }
-
         Collections.addAll(databaseColumns, Student.STUDENT_KEYS);
     }
 

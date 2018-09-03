@@ -48,7 +48,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     mainActivity.insertStudent(student);
                     mainActivity.getStudentFromDatabase();
                     mainActivity.notifyDataSetChanged();
-                    Toast.makeText(this, "Student Added", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(this, "Invalid Data Provided", Toast.LENGTH_SHORT).show();

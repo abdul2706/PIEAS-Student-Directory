@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">PIEAS Student Directory</string>
     <string name="empty">Enter</string>
-    <string name="student_list">Student List</string>
+    <string name="student_list">Student List (%d:%d)</string>
     <string name="registration_form">Registration Form</string>
     <string name="search_student">Search Student</string>
     <string name="student_image">Student Image</string>

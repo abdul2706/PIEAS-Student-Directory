@@ -8,6 +8,7 @@ public class Student implements Serializable {
     private HashMap<String, String> studentData = new HashMap<>();
     public static final String[] STUDENT_KEYS = {"studentName", "fatherName", "regNo", "batch", "department", "semester",
             "roomNo", "hostel", "cgpa", "age", "gender", "bloodGroup", "phoneNo", "email", "address"};
+    private Photo photo = new Photo();
 
 //    public Student() {
 //        this("Abdul Rehman Khan", "Tanveer Ahmed Khan", "03310032017", "17-21", "dcis",
@@ -43,7 +44,7 @@ public class Student implements Serializable {
         return studentData.get(key);
     }
 
-    private void setStudentData(String key, String value) {
+    public void setStudentData(String key, String value) {
         switch (key){
             case "regNo":
                 studentData.put(key, getValidRegNo(value));
@@ -71,6 +72,14 @@ public class Student implements Serializable {
         }
     }
 
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -84,7 +93,9 @@ public class Student implements Serializable {
     public boolean equals(Object std) {
         if (std instanceof Student) {
             Student student = (Student) std;
-            return this.studentData.get("regNo").equalsIgnoreCase(student.studentData.get("regNo"));
+            return this.studentData.get("regNo").equalsIgnoreCase(student.studentData.get("regNo")) ||
+                    this.studentData.get("phoneNo").equalsIgnoreCase(student.studentData.get("phoneNo")) ||
+                    this.studentData.get("email").equalsIgnoreCase(student.studentData.get("email"));
         }
         return false;
     }
