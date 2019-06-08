@@ -1,57 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/itemRelativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:drawable/editbox_background"
-    android:padding="8dp"
-    tools:context=".ShowStudentActivity">
+    android:layout_alignBottom="@+id/imageView"
+    android:layout_alignParentStart="true"
+    android:padding="0dp"
+    tools:context=".ShowPersonActivity">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/man_icon" />
-
-    <TextView
-        android:id="@+id/nameTextView"
-        android:layout_width="260dp"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_marginStart="110dp"
-        android:background="@drawable/gradient_filled_rectangle"
-        android:gravity="center"
-        android:padding="4dp"
-        android:textSize="18sp" />
+        android:background="@drawable/black_boundary"
+        android:padding="8dp"
+        tools:context=".ShowPersonActivity">
+        <!--android:backgroundTint="@android:color/background_dark"-->
+        <!--android:background="@android:drawable/editbox_background"-->
 
-    <TextView
-        android:id="@+id/departmentTextView"
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignStart="@+id/nameTextView"
-        android:background="@drawable/gradient_filled_rectangle"
-        android:gravity="center"
-        android:padding="4dp"
-        android:textSize="18sp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/man_icon" />
 
-    <TextView
-        android:id="@+id/regTextView"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_alignEnd="@+id/nameTextView"
-        android:background="@drawable/gradient_filled_rectangle"
-        android:gravity="center"
-        android:padding="4dp"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/black_boundary"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textSize="18sp"
+            android:backgroundTint="#ffffff"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Name" />
 
+        <TextView
+            android:id="@+id/departmentTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignStart="@+id/nameTextView"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/black_boundary"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            tools:text="Department" />
+
+        <TextView
+            android:id="@+id/regTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignEnd="@+id/nameTextView"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/black_boundary"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/departmentTextView"
+            tools:text="Reg#" />
+    </android.support.constraint.ConstraintLayout>
 </RelativeLayout>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:id="@+id/itemRelativeLayout"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:background="@android:drawable/editbox_background"-->
+<!--android:padding="8dp"-->
+<!--tools:context=".ShowPersonActivity">-->
+
+<!--<ImageView-->
+    <!--android:id="@+id/imageView"-->
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_height="100dp"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignParentTop="true"-->
+    <!--android:contentDescription="@string/app_name"-->
+    <!--android:scaleType="centerCrop"-->
+    <!--app:srcCompat="@drawable/man_icon" />-->
+
+<!--<TextView-->
+    <!--android:id="@+id/nameTextView"-->
+    <!--android:layout_width="260dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentStart="true"-->
+    <!--android:layout_alignTop="@+id/imageView"-->
+    <!--android:layout_marginStart="110dp"-->
+    <!--android:background="@android:drawable/editbox_background"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="4dp"-->
+    <!--android:textSize="18sp"-->
+    <!--tools:text="Name" />-->
+
+<!--<TextView-->
+    <!--android:id="@+id/departmentTextView"-->
+    <!--android:layout_width="60dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBottom="@+id/imageView"-->
+    <!--android:layout_alignStart="@+id/nameTextView"-->
+    <!--android:background="@android:drawable/editbox_background"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="4dp"-->
+    <!--android:textSize="18sp"-->
+    <!--tools:text="Depart" />-->
+
+<!--<TextView-->
+    <!--android:id="@+id/regTextView"-->
+    <!--android:layout_width="150dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignBottom="@+id/imageView"-->
+    <!--android:layout_alignEnd="@+id/nameTextView"-->
+    <!--android:background="@android:drawable/editbox_background"-->
+    <!--android:gravity="center"-->
+    <!--android:padding="4dp"-->
+    <!--android:textSize="18sp"-->
+    <!--tools:text="Reg#" />-->
+
+<!--</RelativeLayout>-->

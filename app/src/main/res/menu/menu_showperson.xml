@@ -3,12 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/selectImage"
-        android:icon="@android:drawable/ic_menu_camera"
-        android:title="@string/student_image"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/msgBtn"
         android:icon="@android:drawable/ic_menu_send"
         android:title="@string/message"
@@ -19,9 +13,5 @@
         android:icon="@android:drawable/ic_menu_call"
         android:title="@string/call"
         app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/edit"
-        android:title="@string/edit" />
 
 </menu>

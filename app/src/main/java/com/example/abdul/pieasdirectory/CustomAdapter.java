@@ -1,68 +1,50 @@
-package com.example.abdul.pieasstudentdirectory;
+package com.example.abdul.pieasdirectory;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
 
     private static final String TAG = "CustomAdapter";
-    private ArrayList<Student> studentArrayList;
-//    private List<Photo> photoList;
+    private ArrayList<Person> personArrayList;
     private MainActivity mainActivity;
 
-    CustomAdapter(MainActivity mainActivity, ArrayList<Student> studentsList, List<Photo> photoList) {
+    CustomAdapter(MainActivity mainActivity, ArrayList<Person> people) {
         this.mainActivity = mainActivity;
-        this.studentArrayList = studentsList;
-//        this.photoList = photoList;
+        this.personArrayList = new ArrayList<>();
+        this.personArrayList = people;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-//        View view = layoutInflater.inflate(R.layout.list_item_layout, parent, false);
-//        return new ViewHolder(view);
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_layout, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        try {
-            Photo photoItem = studentArrayList.get(position).getPhoto();
-            Picasso.get().load(photoItem.getPhotoURL() + "_s.jpg")
-                    .error(R.drawable.man_icon)
-                    .placeholder(R.drawable.man_icon)
-                    .into(holder.imageView);
-        } catch (Exception e) {
-            holder.imageView.setImageResource(R.drawable.man_icon);
-        }
-        holder.nameTextView.setText(studentArrayList.get(position).getStudentData("studentName").toUpperCase());
-        holder.departTextView.setText(studentArrayList.get(position).getStudentData("department").toUpperCase());
-        holder.regNoTextView.setText(studentArrayList.get(position).getStudentData("regNo"));
+        holder.nameTextView.setText(personArrayList.get(position).getPersonData("personName").toUpperCase());
+        holder.departmentTextView.setText(personArrayList.get(position).getPersonData("department").toUpperCase());
+        holder.regNoTextView.setText(personArrayList.get(position).getPersonData("regNo"));
 
         final int index = position;
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.getContext(), ShowStudentActivity.class);
+                Intent intent = new Intent(mainActivity, ShowPersonActivity.class);
                 intent.putExtra("index", index);
-                mainActivity.startActivityForResult(intent, ShowStudentActivity.SHOW_STUDENT_ACTIVITY);
+                mainActivity.startActivityForResult(intent, ShowPersonActivity.SHOW_PERSON_ACTIVITY);
             }
         });
 
@@ -76,9 +58,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                mainActivity.deleteStudent(index);
-                                mainActivity.getStudentFromDatabase();
+                                DatabaseHandler.deletePerson(mainActivity, index);
+                                personArrayList.remove(index);
                                 mainActivity.notifyDataSetChanged();
+//                                loadPersonsData(personArrayList);
                             }
                         })
                         .setNegativeButton("No", null)
@@ -90,34 +73,27 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return studentArrayList.size();
+        return personArrayList.size();
     }
 
-//    public void loadData(List<Photo> newPhotoList) {
-//        photoList = newPhotoList;
-//        notifyDataSetChanged();
-//        Log.d(TAG, "loadData: photoList.size() -> " + photoList.size());
-//        mainActivity.notifyDataSetChanged();
-//    }
-
-//    public Photo getPhoto(int position) {
-//        return ((photoList != null && photoList.size() != 0) ? photoList.get(position) : null);
-//    }
+    public void loadPersonsData(ArrayList<Person> people) {
+        this.personArrayList = people;
+        notifyDataSetChanged();
+    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
         RelativeLayout relativeLayout;
-        ImageView imageView;
         TextView nameTextView;
-        TextView departTextView;
+        TextView departmentTextView;
         TextView regNoTextView;
 
         ViewHolder(View itemView) {
             super(itemView);
             relativeLayout = itemView.findViewById(R.id.itemRelativeLayout);
-            imageView = itemView.findViewById(R.id.imageView);
             nameTextView = itemView.findViewById(R.id.nameTextView);
-            departTextView = itemView.findViewById(R.id.departmentTextView);
+            departmentTextView = itemView.findViewById(R.id.departmentTextView);
             regNoTextView = itemView.findViewById(R.id.regTextView);
         }
     }
+
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/showAll"
@@ -7,22 +8,20 @@
 
     <item
         android:id="@+id/search"
-        android:title="@string/search" />
-
-    <item
-        android:id="@+id/add"
-        android:title="@string/add" />
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="@string/search"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/about"
         android:title="@string/about" />
 
     <item
-        android:id="@+id/loadStudent"
-        android:title="Load Student" />
+        android:id="@+id/loadPerson"
+        android:title="@string/load_person" />
 
     <item
         android:id="@+id/deleteTable"
-        android:title="Delete Table" />
+        android:title="@string/delete_table" />
 
 </menu>

@@ -1,11 +1,14 @@
-package com.example.abdul.pieasstudentdirectory;
+package com.example.abdul.pieasdirectory;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 public class LargeUserImage extends AppCompatActivity {
 
@@ -23,9 +26,9 @@ public class LargeUserImage extends AppCompatActivity {
         String studentName = intent.getExtras().getString("studentName");
         setTitle(studentName);
 
-        String studentImageURL = intent.getExtras().getString("studentImageURL");
+        String studentPhotoFileString = intent.getExtras().getString("studentPhotoFileString");
         try {
-            Picasso.get().load(studentImageURL + "_b.jpg")
+            Picasso.get().load(Uri.fromFile(new File(studentPhotoFileString)))
                     .error(R.drawable.man_icon)
                     .placeholder(R.drawable.man_icon)
                     .into(imageView);

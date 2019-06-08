@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.0">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_horizontal"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<ImageView-->
+                <!--android:id="@+id/studentImageView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="256dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:contentDescription="@string/student_image"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"-->
+                <!--app:srcCompat="@drawable/man_icon" />-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/studentNameTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/student_name"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/studentNameEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/fatherNameTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/father_name"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/fatherNameEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/regNoTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/registration"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/cellNoEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/batchTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/batch"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/extensionEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/departmentTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/department"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/phoneNoEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/semesterTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/semester"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/semesterEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/roomTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/room"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/roomEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/hostelTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/hostel"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/emailEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/cgpaTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/cgpa"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/cgpaEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/ageTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/age"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/ageEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/genderTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/gender"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/genderEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/bloodGroupTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/blood_group"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/departmentEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/phoneNoTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/phone"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/officeLocationEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/emailTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/email"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/emailEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@android:drawable/editbox_background"-->
+                <!--android:gravity="start"-->
+                <!--android:orientation="horizontal">-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/addressTextView"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:text="@string/address"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/addressEditText"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_margin="8dp"-->
+                    <!--android:background="@drawable/gradient_filled_rectangle"-->
+                    <!--android:padding="8dp"-->
+                    <!--android:textAllCaps="true"-->
+                    <!--android:textColor="#000000"-->
+                    <!--android:textSize="14sp" />-->
+            <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+</android.support.constraint.ConstraintLayout>
